@@ -39,7 +39,7 @@ namespace SWT_Team22_ATM.interpreter
             int a;
             if (Int32.TryParse(s[3], out a))
             {
-                t.Altitude = a;
+                t.TrackPosition.ZCoordinate = a;
             }
 
             t.TimeStamp = s[4];
