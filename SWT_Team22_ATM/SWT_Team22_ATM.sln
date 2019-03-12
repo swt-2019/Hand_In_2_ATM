@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWT_Team22_ATM", "SWT_Team2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWT_TEAM22_ATM.Test.Unit", "SWT_TEAM22_ATM.Test.Unit\SWT_TEAM22_ATM.Test.Unit.csproj", "{6815CE7A-6208-4E5B-AE26-55B05EBC1E21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser", "TransponderReceiverUser\TransponderReceiverUser.csproj", "{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser.Test.Unit", "TransponderReceiverUser.Test.Unit\TransponderReceiverUser.Test.Unit.csproj", "{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6815CE7A-6208-4E5B-AE26-55B05EBC1E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6815CE7A-6208-4E5B-AE26-55B05EBC1E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6815CE7A-6208-4E5B-AE26-55B05EBC1E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9E07F6-3D14-47C9-955E-FF20C7FE5433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
