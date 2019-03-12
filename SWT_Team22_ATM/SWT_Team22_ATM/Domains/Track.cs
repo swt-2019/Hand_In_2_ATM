@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SWT_Team22_ATM.Domains
 {
-    public class Track
+    public class Track : ITrack
     {
         public Position TrackPosition { get; set; }
-        public int Altitude { get; set; }
         public string Tag { get; set; }
         public string TimeStamp { get; set; }
     }

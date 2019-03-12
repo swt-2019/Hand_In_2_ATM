@@ -10,5 +10,6 @@ namespace SWT_Team22_ATM.Domains
     {
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
+        public int ZCoordinate { get; set; }
     }
 }
