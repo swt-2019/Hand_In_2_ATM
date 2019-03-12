@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SWT_Team22_ATM.Validation
 {
-    class ValidateTransponderData
+    class ValidateTransponderData : IValidator
     {
+        public event EventHandler<ValidateEventArgs> ValidationEvent;
+
+        protected virtual void OnNewValidation(ValidateEventArgs e)
+        {
+            ValidationEvent?.Invoke(this, e);
+        }
     }
 }

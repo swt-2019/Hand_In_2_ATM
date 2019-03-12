@@ -10,6 +10,6 @@ namespace SWT_Team22_ATM.interpreter
     public interface Iinterpret
     {
         
-        Track interpret(string TransponderData); 
+        Track interpret(string TransponderData);
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\PositionAirspaceValidator.cs" />
     <Compile Include="Validation\TrackAirspaceValidator.cs" />
+    <Compile Include="Validation\ValidateEventArgs.cs" />
     <Compile Include="Validation\ValidateTransponderData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
