@@ -11,7 +11,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
     public class TransponderTests
     {
         [Test]
-        void DummyTest()
+        public void DummyTest()
         {
             Assert.True(true);
         }
