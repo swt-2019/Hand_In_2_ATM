@@ -59,6 +59,7 @@
     <Compile Include="interpreter\TransponderDataInterpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransponderReceiver.cs" />
+    <Compile Include="Validation\IValidateEvent.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\PositionAirspaceValidator.cs" />
     <Compile Include="Validation\TrackAirspaceValidator.cs" />

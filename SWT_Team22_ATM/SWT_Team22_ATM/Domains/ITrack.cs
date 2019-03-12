@@ -3,5 +3,6 @@
     public interface ITrack
     {
         Position TrackPosition { get; set; }
+        string Tag { get; set; }
     }
 }
