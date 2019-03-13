@@ -9,6 +9,6 @@ namespace SWT_Team22_ATM.Validation
 {
     public interface IValidator
     {
-        bool Validate(ITrack track);
+        bool Validate(ITrack track, Airspace airspace);
     }
 }
