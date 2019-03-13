@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConditionDetectorTest\AirspaceTrackConditionDetectorTest.cs" />
+    <Compile Include="ConditionDetectorTest\TrackHorizontalDistanceConditionTest.cs" />
     <Compile Include="FakeAirspaceGenerator.cs" />
     <Compile Include="FakeTrackFactory.cs" />
     <Compile Include="ConditionDetectorTest\TrackAltitudeConditionTest.cs" />
