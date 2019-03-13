@@ -7,7 +7,7 @@ using NUnit.Framework;
 using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 
-namespace SWT_TEAM22_ATM.Test.Unit.ConditionDetectorTest
+namespace SWT_TEAM22_ATM.Test.Unit
 {
     [TestFixture]
     public class TrackHorizontalDistanceConditionTest
