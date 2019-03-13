@@ -8,5 +8,6 @@ namespace SWT_Team22_ATM.Validation
 {
     public class ValidateEventArgs : EventArgs
     {
+        public bool IsValid { get; set; }
     }
 }

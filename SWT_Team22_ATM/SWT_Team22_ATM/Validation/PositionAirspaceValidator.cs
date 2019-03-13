@@ -9,15 +9,31 @@ namespace SWT_Team22_ATM.Validation
 {
     public class PositionAirspaceValidator : IValidator
     {
+        private ITrack _track;
+        private Airspace _airspace;
+
+        public bool Validate(ITrack track, Airspace airspace)
+        {
+            _track = track;
+            _airspace = airspace;
+            return IsTrackInAirspace();
+        }
 
         private bool IsTrackInAirspace()
         {
-            return true;
+            return IsTrackXCoordinateInAirspaceArea() & IsTrackYCoordinateInAirspaceArea();
         }
 
-        public bool Validate(ITrack track)
+        private bool IsTrackXCoordinateInAirspaceArea()
         {
-            return false;
+            return _track.TrackPosition.XCoordinate < _airspace.AirspacePosition.XCoordinate &&
+                   _track.TrackPosition.XCoordinate > _airspace.AirspacePosition.XCoordinate;
+        }
+
+        private bool IsTrackYCoordinateInAirspaceArea()
+        {
+            return _track.TrackPosition.YCoordinate < _airspace.AirspacePosition.YCoordinate &&
+                   _track.TrackPosition.YCoordinate > _airspace.AirspacePosition.YCoordinate;
         }
     }
 }
