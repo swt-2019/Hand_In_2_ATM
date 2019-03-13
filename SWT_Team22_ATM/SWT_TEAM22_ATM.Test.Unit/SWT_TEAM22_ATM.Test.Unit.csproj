@@ -56,11 +56,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConditionDetectorTest\AirspaceTrackConditionDetectorTest.cs" />
+    <Compile Include="FakeAirspaceGenerator.cs" />
+    <Compile Include="FakeTrackFactory.cs" />
+    <Compile Include="ConditionDetectorTest\TrackAltitudeConditionTest.cs" />
     <Compile Include="TransponderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SWT_Team22_ATM\SWT_Team22_ATM.csproj">
+      <Project>{646990D5-AD12-424A-B692-CC1991337868}</Project>
+      <Name>SWT_Team22_ATM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TransponderReceiverUser\TransponderReceiverUser.csproj">
+      <Project>{ad9e07f6-3d14-47c9-955e-ff20c7fe5433}</Project>
+      <Name>TransponderReceiverUser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

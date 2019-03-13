@@ -6,7 +6,7 @@ namespace SWT_Team22_ATM.ConditionDetector
 {
     public interface IConditionDetector
     {
-        EventHandler<ConditionEventArgs> Conditions { get; set; }
+        event EventHandler<ConditionEventArgs> ConditionsHandler;
         void DetectCondition(ITrackable trackable, ITrack tracker);
     }
 }

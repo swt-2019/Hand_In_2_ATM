@@ -7,14 +7,15 @@ using SWT_Team22_ATM.Domains;
 
 namespace SWT_Team22_ATM.ConditionDetector
 {
-    class AirspaceTrackConditionDetector : IConditionDetector
+    public class AirspaceTrackConditionDetector : IConditionDetector
     {
-        public EventHandler<ConditionEventArgs> Conditions { get; set; }
-        List<IConditionStrategy<ITrack>> ConditionToCheckFor = new List<IConditionStrategy<ITrack>>()
+        public event EventHandler<ConditionEventArgs> ConditionsHandler;
+        public List<IConditionStrategy<ITrack>> ConditionToCheckFor { get; set; }
+
+        public AirspaceTrackConditionDetector(List<IConditionStrategy<ITrack>> conditionsToCheckFor)
         {
-            new TrackHorizontalDistanceCondition(),
-            new TrackAltitudeCondition()
-        };
+            ConditionToCheckFor = conditionsToCheckFor;
+        }
 
         public void DetectCondition(ITrackable trackable, ITrack toTrack)
         {
@@ -23,9 +24,15 @@ namespace SWT_Team22_ATM.ConditionDetector
                 ConditionToCheckFor.ForEach(c =>
                 {
                     if(c.ConditionBetween(toTrack, track))
-                        Conditions.Invoke(this,new ConditionEventArgs(toTrack,track));
+                        OnCondition(new ConditionEventArgs(toTrack,track));
+
                 });
             });
+        }
+
+        private void OnCondition(ConditionEventArgs e)
+        {
+            ConditionsHandler?.Invoke(this, e);
         }
     }
 }

@@ -8,8 +8,9 @@ namespace SWT_Team22_ATM.ConditionDetector
 
         public bool ConditionBetween(ITrack check, ITrack comparedTo)
         {
-            var horizontalDistanceBetween = check.TrackPosition.XCoordinate - comparedTo.TrackPosition.XCoordinate;
-            return horizontalDistanceBetween < HorizontalDistance;
+            var xDistanceBetween = check.TrackPosition.XCoordinate - comparedTo.TrackPosition.XCoordinate;
+            var yDistanceBetween = check.TrackPosition.YCoordinate - comparedTo.TrackPosition.YCoordinate;
+            return xDistanceBetween < HorizontalDistance || yDistanceBetween < HorizontalDistance;
         }
     }
 }
