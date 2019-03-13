@@ -1,4 +1,5 @@
-﻿using SWT_Team22_ATM.Domains;
+﻿using System;
+using SWT_Team22_ATM.Domains;
 
 namespace SWT_Team22_ATM.ConditionDetector
 {
@@ -8,9 +9,9 @@ namespace SWT_Team22_ATM.ConditionDetector
 
         public bool ConditionBetween(ITrack check, ITrack comparedTo)
         {
-            var xDistanceBetween = check.TrackPosition.XCoordinate - comparedTo.TrackPosition.XCoordinate;
-            var yDistanceBetween = check.TrackPosition.YCoordinate - comparedTo.TrackPosition.YCoordinate;
-            return xDistanceBetween < HorizontalDistance || yDistanceBetween < HorizontalDistance;
+            var xDistanceBetween = Math.Abs(check.TrackPosition.XCoordinate - comparedTo.TrackPosition.XCoordinate);
+            var yDistanceBetween = Math.Abs(check.TrackPosition.YCoordinate - comparedTo.TrackPosition.YCoordinate);
+            return xDistanceBetween <= HorizontalDistance || yDistanceBetween <= HorizontalDistance;
         }
     }
 }

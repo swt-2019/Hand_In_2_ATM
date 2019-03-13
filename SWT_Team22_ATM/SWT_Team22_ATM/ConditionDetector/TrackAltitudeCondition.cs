@@ -9,11 +9,11 @@ namespace SWT_Team22_ATM.ConditionDetector
 {
     public class TrackAltitudeCondition : IConditionStrategy<ITrack>
     {
-        public int AltitudeCondition { get; set; }
+        public int AltitudeRestriction { get; set; }
         public bool ConditionBetween(ITrack check, ITrack comparedTo)
         {
-            var altitudeDiff = check.TrackPosition.ZCoordinate - comparedTo.TrackPosition.ZCoordinate;
-            return altitudeDiff < AltitudeCondition;
+            var altitudeDiff = Math.Abs(check.TrackPosition.ZCoordinate - comparedTo.TrackPosition.ZCoordinate);
+            return altitudeDiff <= AltitudeRestriction;
         }
     }
 }
