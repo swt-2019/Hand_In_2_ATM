@@ -61,6 +61,10 @@
     <Compile Include="FakeAirspaceGenerator.cs" />
     <Compile Include="FakeTrackFactory.cs" />
     <Compile Include="ConditionDetectorTest\TrackAltitudeConditionTest.cs" />
+    <Compile Include="OutputterFakes\FakeConsoleAirTrafficController.cs" />
+    <Compile Include="OutputterTests\ConsoleAirTrafficControllerTests.cs" />
+    <Compile Include="OutputterTests\FileLoggerTests.cs" />
+    <Compile Include="OutputterTests\OutputterTests.cs" />
     <Compile Include="TransponderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

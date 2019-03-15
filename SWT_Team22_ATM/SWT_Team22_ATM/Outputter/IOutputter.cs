@@ -8,7 +8,10 @@ namespace SWT_Team22_ATM
     {
         ILogger Logger { get; set; }
         ITrafficController TrafficController { get; set; }
-        void ConditionDetected(ITrack track1, ITrack track2, List<ITrack> trackables);
-        void UpdateTrackDisplay(List<ITrack> trackables);
+
+        string PathToFile { get; set; }
+        
+        void ConditionDetected(List<Condtion> condtions, Airspace airspace);
+        void UpdateTrackDisplay(Airspace airspace);
     }
 }

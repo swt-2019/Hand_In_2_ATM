@@ -16,9 +16,13 @@ namespace SWT_Team22_ATM
             }
         }
 
-        public void DisplayConditions(ITrack track1, ITrack track2, List<ITrack> trackables)
+        public void DisplayConditions(List<Condtion> conditions, List<ITrack> trackables)
         {
-            Console.WriteLine("Condition detected between " + track1.Tag + " & " + track2.Tag);
+            foreach (var condition in conditions)
+            {
+                Console.WriteLine("Condition detected between " + condition.Track1.Tag + " & " + condition.Track2.Tag);
+            }
+            
             DisplayTracks(trackables);
         }
     }

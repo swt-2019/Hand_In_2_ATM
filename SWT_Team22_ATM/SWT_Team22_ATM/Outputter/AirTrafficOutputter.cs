@@ -10,15 +10,19 @@ namespace SWT_Team22_ATM
         public ILogger Logger { get; set; }
         public ITrafficController TrafficController { get; set; }
 
-        public void ConditionDetected(ITrack track1, ITrack track2, List<ITrack> trackables)
+        public string PathToFile { get; set; }
+        public void ConditionDetected(List<Condtion> condtions, Airspace airspace)
         {
-            Logger.LogCondition(track1, track2);
-            TrafficController.DisplayConditions(track1, track2, trackables);
+            foreach (var condtion in condtions)
+            {
+                Logger.LogCondition(condtion.Track1, condtion.Track2, PathToFile);
+            }
+            TrafficController.DisplayConditions(condtions, airspace.Trackables);
         }
 
-        public void UpdateTrackDisplay(List<ITrack> trackables)
+        public void UpdateTrackDisplay(Airspace airspace)
         {
-            TrafficController.DisplayTracks(trackables);
+            TrafficController.DisplayTracks(airspace.Trackables);
         }
     }
 }
