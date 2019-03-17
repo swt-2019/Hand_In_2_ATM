@@ -15,9 +15,9 @@ namespace SWT_Team22_ATM.Validation
             return airspace.Trackables.All(t => IsTrackAlreadyRegistered(t, track)) == false;
         }
 
-        private bool IsTrackAlreadyRegistered(ITrack track, ITrack toCompareWith)//returns false if Tag is == to a Tag in the Trackable collection
+        private bool IsTrackAlreadyRegistered(ITrack track, ITrack toCompareWithTag)//returns false if Tag is == Tag in the Trackable collection
         {
-            return track.Tag != toCompareWith.Tag;
+            return track.Tag != toCompareWithTag.Tag;
         }
     }
 }

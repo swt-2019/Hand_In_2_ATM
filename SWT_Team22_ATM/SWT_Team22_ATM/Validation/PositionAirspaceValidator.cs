@@ -21,6 +21,7 @@ namespace SWT_Team22_ATM.Validation
 
         private bool IsTrackInAirspace()
         {
+
             return IsTrackXCoordinateInAirspaceArea() & IsTrackYCoordinateInAirspaceArea();
         }
 
