@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SWT_Team22_ATM.Domains;
 
 namespace SWT_Team22_ATM.ConditionDetector
 {
-    public class ConditionEventArgs
+    public class ConditionEventArgs : EventArgs
     {
         public ConditionEventArgs(ITrack first, ITrack second)
         {

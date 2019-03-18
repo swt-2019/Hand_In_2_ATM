@@ -68,5 +68,21 @@ namespace SWT_TEAM22_ATM.Test.Unit
 
             Assert.That(result == true);
         }
+
+
+        [TestCase(500, 1300, 2500, 1900, 3800)]
+        [TestCase(700, 1100, 9000, 1900, 4000)]
+        [TestCase(1000, 3000, 1200, 1900, 100)]
+        [TestCase(100, 7000, 1400, 700, 3000)]
+        public void ConditionBetween_ConditionNotFoundAnyCoordinate_ReturnsFalse(int horizontalRestriction, int xTrack1, int yTrack1, int xTrack2, int yTrack2)
+        {
+            _uutTrackHorizontalDistanceCondition.HorizontalDistance = horizontalRestriction;
+            ITrack track1 = FakeTrackFactory.GetTrack(xTrack1, yTrack1, 1000);
+            ITrack track2 = FakeTrackFactory.GetTrack(xTrack2, yTrack2, 1000);
+
+            var result = _uutTrackHorizontalDistanceCondition.ConditionBetween(track1, track2);
+
+            Assert.That(result == false);
+        }
     }
 }
