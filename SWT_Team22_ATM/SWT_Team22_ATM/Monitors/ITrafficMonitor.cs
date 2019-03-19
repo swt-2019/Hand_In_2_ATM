@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using SWT_Team22_ATM.Domains;
 
-namespace SWT_Team22_ATM.Validation
+namespace SWT_Team22_ATM.Monitors
 {
-    public class ValidateEventArgs : EventArgs
+    public interface ITrafficMonitor
     {
-        public Track Track { get; set; }
-
+        Airspace Airspace { get; set; }
     }
 }

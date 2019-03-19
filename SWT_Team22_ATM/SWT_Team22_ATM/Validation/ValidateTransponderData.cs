@@ -3,16 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SWT_Team22_ATM.Domains;
+using SWT_Team22_ATM.Monitors;
+using SWT_Team22_ATM.Validation;
 
 namespace SWT_Team22_ATM.Validation
 {
-    class ValidateTransponderData : IValidateEvent
+    public class ValidateTransponderData : IValidateEvent
     {
         public event EventHandler<ValidateEventArgs> ValidationEvent;
 
-        protected virtual void OnNewValidation(ValidateEventArgs e)
+        PositionAirspaceValidator psAirspaceValidator = new PositionAirspaceValidator();
+
+
+        public ValidateTransponderData(ref IValidateEvent validateEvent)
         {
-            ValidationEvent?.Invoke(this, e);
+            validateEvent.ValidationEvent += OnNewValidation;
+        }
+
+
+        private ITrafficMonitor monitor;
+
+
+
+
+        private void OnNewValidation(object sender, ValidateEventArgs e)
+        {
+            psAirspaceValidator?.Validate(e.Track, monitor.Airspace);
         }
     }
 }
