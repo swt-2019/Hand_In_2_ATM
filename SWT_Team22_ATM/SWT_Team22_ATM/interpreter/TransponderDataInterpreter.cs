@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SWT_Team22_ATM.Domains;
+using SWT_Team22_ATM.Validation;
 
 namespace SWT_Team22_ATM.interpreter
 {
-    class TransponderDataInterpreter : Iinterpret
+    class TransponderDataInterpreter : Iinterpret, IValidateEvent
     {
         public Track interpret(string TransponderData)
         {
@@ -44,8 +45,21 @@ namespace SWT_Team22_ATM.interpreter
 
             t.TimeStamp = s[4];
 
+            OnNewTag(new ValidateEventArgs()
+            {
+                Track = t
+            });
+
             return t;
 
+        }
+
+
+        public event EventHandler<ValidateEventArgs> ValidationEvent;
+
+        protected virtual void OnNewTag(ValidateEventArgs e)
+        {
+            ValidationEvent?.Invoke(this,e);
         }
     }
 }

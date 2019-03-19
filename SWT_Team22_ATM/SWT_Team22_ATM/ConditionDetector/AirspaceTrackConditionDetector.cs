@@ -21,12 +21,18 @@ namespace SWT_Team22_ATM.ConditionDetector
         {
             trackable.Trackables.ForEach(track =>
             {
-                ConditionToCheckFor.ForEach(c =>
-                {
-                    if(c.ConditionBetween(toTrack, track))
-                        OnCondition(new ConditionEventArgs(toTrack,track));
+                DetectTrackOnTrackCondition(toTrack,track);
+            });
+        }
 
-                });
+        public void DetectTrackOnTrackCondition(ITrack firstTrack, ITrack secondTrack)
+        {
+
+            ConditionToCheckFor.ForEach(c =>
+            {
+                if (c.ConditionBetween(firstTrack, secondTrack))
+                    OnCondition(new ConditionEventArgs(firstTrack, secondTrack));
+
             });
         }
 
