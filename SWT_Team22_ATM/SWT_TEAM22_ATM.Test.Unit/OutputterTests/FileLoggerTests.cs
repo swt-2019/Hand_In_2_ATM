@@ -20,8 +20,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void FileLogger_Setup()
         {
             _logger = new FileLogger();
-            _logFile = "TestLog.txt";
-            _fileStream = new FileStream(_logFile, FileMode.Open, FileAccess.Read);
+            _logFile = "../../TestLog.txt";
             
             _track1 = FakeTrackFactory.GetTrackWithTag("Tag1", 1, 2, 3);
             _track2 = FakeTrackFactory.GetTrackWithTag("Tag2", 4, 5, 6);
@@ -51,7 +50,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         {
             _logger.LogCondition(_track1,_track2,_logFile);
             string text;
-            using (var streamReader = new StreamReader(_fileStream))
+            using (var streamReader = new StreamReader(new FileStream(_logFile, FileMode.Open, FileAccess.Read)))
             {
                 text = streamReader.ReadLine();
             }
