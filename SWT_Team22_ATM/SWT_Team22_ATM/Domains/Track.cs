@@ -11,5 +11,6 @@ namespace SWT_Team22_ATM.Domains
         public Position TrackPosition { get; set; }
         public string Tag { get; set; }
         public string TimeStamp { get; set; }
+        public double Speed { get; set; }
     }
 }
