@@ -9,7 +9,7 @@ namespace SWT_Team22_ATM.Validation
 {
     public class ValidateEventArgs : EventArgs
     {
-        public Track Track { get; set; }
+        public List<Track> TrackList { get; set; }
 
     }
 }

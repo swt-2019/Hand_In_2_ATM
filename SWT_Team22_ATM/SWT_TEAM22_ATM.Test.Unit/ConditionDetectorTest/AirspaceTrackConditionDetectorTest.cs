@@ -30,14 +30,14 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void DetectCondition_ConditionFound_EventHandlerInvoked()
         {
             bool invoked = false;
-            ITrack trackInAirspace = FakeTrackFactory.GetTrack(1000, 1000, 1000);
-            ITrack trackToCheck = FakeTrackFactory.GetTrack(1100, 1100, 1000);
+            ITrack firstTrack = FakeTrackFactory.GetTrack(1000, 1000, 1000);
+            ITrack secondTrack = FakeTrackFactory.GetTrack(1100, 1100, 1000);
             ITrackable airspace = FakeAirspaceGenerator.GetAirspace(0, 0, 0);
+            airspace.Trackables = new List<ITrack>() { firstTrack, secondTrack };
             _fakeCondition.ConditionBetween(Arg.Any<ITrack>(),Arg.Any<ITrack>()).Returns(true);
-            airspace.Trackables.Add(trackInAirspace);
             _uutConditionDetector.ConditionsHandler += (s,e) => invoked = true;
 
-            _uutConditionDetector.DetectCondition(airspace,trackToCheck);
+            _uutConditionDetector.DetectCondition(airspace);
 
             Assert.That(invoked);
         }
@@ -47,14 +47,14 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void DetectCondition_ConditionNotFound_EventHandlerNotInvoked()
         {
             bool invoked = false;
-            ITrack trackInAirspace = FakeTrackFactory.GetTrack(1000, 1000, 1000);
-            ITrack trackToCheck = FakeTrackFactory.GetTrack(1100, 1100, 1000);
+            ITrack firstTrack = FakeTrackFactory.GetTrack(1000, 1000, 1000);
+            ITrack secondTrack = FakeTrackFactory.GetTrack(1100, 1100, 1000);
             ITrackable airspace = FakeAirspaceGenerator.GetAirspace(0, 0, 0);
+            airspace.Trackables = new List<ITrack>() {firstTrack, secondTrack};
             _fakeCondition.ConditionBetween(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(false);
-            airspace.Trackables.Add(trackInAirspace);
             _uutConditionDetector.ConditionsHandler += (s, e) => invoked = true;
 
-            _uutConditionDetector.DetectCondition(airspace, trackToCheck);
+            _uutConditionDetector.DetectCondition(airspace);
 
             Assert.That(invoked == false);
         }
@@ -69,18 +69,20 @@ namespace SWT_TEAM22_ATM.Test.Unit
         {
             int timesInvoked = 0;
             ITrack trackInAirspace = FakeTrackFactory.GetTrack(1000, 1000, 1000);
-            ITrack trackToCheck = FakeTrackFactory.GetTrack(1100, 1100, 1000);
             ITrackable airspace = FakeAirspaceGenerator.GetAirspace(0, 0, 0);
-            _fakeCondition.ConditionBetween(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(true);
+            airspace.Trackables.Add(trackInAirspace); //There must be one track always
             for (int i = 0; i < numConditions; i++)
             {
                 airspace.Trackables.Add(trackInAirspace);
             }
+            //Because each element in the airspace is compared to each other:
+            int expectedVisitations = numConditions * airspace.Trackables.Count / 2;
+            _fakeCondition.ConditionBetween(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(true);
             _uutConditionDetector.ConditionsHandler += (s, e) => ++timesInvoked;
 
-            _uutConditionDetector.DetectCondition(airspace, trackToCheck);
+            _uutConditionDetector.DetectCondition(airspace);
 
-            Assert.That(timesInvoked, Is.EqualTo(numConditions));
+            Assert.That(timesInvoked, Is.EqualTo(expectedVisitations));
         }
 
 
@@ -89,16 +91,16 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void DetectCondition_ConditionFound_FirstConditionCorrect()
         {
             ConditionEventArgs eventArgsReceived = null;
-            ITrack trackInAirspace = FakeTrackFactory.GetTrack(1000, 1000, 1000);
-            ITrack trackToCheck = FakeTrackFactory.GetTrack(1100, 1100, 1000);
+            ITrack firstTrack = FakeTrackFactory.GetTrack(1000, 1000, 1000);
+            ITrack secondTrack = FakeTrackFactory.GetTrack(1100, 1100, 1000);
             ITrackable airspace = FakeAirspaceGenerator.GetAirspace(0, 0, 0);
+            airspace.Trackables = new List<ITrack>() {firstTrack, secondTrack};
             _fakeCondition.ConditionBetween(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(true);
-            airspace.Trackables.Add(trackInAirspace);
             _uutConditionDetector.ConditionsHandler += (s, e) => eventArgsReceived = e;
 
-            _uutConditionDetector.DetectCondition(airspace, trackToCheck);
+            _uutConditionDetector.DetectCondition(airspace);
 
-            Assert.That(eventArgsReceived.FirstConditionHolder,Is.EqualTo(trackToCheck));
+            Assert.That(eventArgsReceived.FirstConditionHolder,Is.EqualTo(firstTrack));
         }
 
 
@@ -106,16 +108,16 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void DetectCondition_ConditionFound_SecondConditionCorrect()
         {
             ConditionEventArgs eventArgsReceived = null;
-            ITrack trackInAirspace = FakeTrackFactory.GetTrack(1000, 1000, 1000);
-            ITrack trackToCheck = FakeTrackFactory.GetTrack(1100, 1100, 1000);
+            ITrack firstTrack = FakeTrackFactory.GetTrack(1000, 1000, 1000);
+            ITrack secondTrack = FakeTrackFactory.GetTrack(1100, 1100, 1000);
             ITrackable airspace = FakeAirspaceGenerator.GetAirspace(0, 0, 0);
+            airspace.Trackables = new List<ITrack>() { firstTrack, secondTrack };
             _fakeCondition.ConditionBetween(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(true);
-            airspace.Trackables.Add(trackInAirspace);
             _uutConditionDetector.ConditionsHandler += (s, e) => eventArgsReceived = e;
 
-            _uutConditionDetector.DetectCondition(airspace, trackToCheck);
+            _uutConditionDetector.DetectCondition(airspace);
 
-            Assert.That(eventArgsReceived.SecondConditionHolder, Is.EqualTo(trackInAirspace));
+            Assert.That(eventArgsReceived.SecondConditionHolder, Is.EqualTo(secondTrack));
         }
     }
 }

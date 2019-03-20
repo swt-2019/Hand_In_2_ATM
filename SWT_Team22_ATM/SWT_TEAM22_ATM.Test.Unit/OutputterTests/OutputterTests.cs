@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using NSubstitute;
 using NUnit.Framework;
 using SWT_Team22_ATM;
 using SWT_Team22_ATM.Domains;
@@ -13,35 +15,30 @@ namespace SWT_TEAM22_ATM.Test.Unit
         private List<ITrack> _tracks;
         private List<Condtion> _condtions;
         private Airspace _airspace;
-        private FakeConsoleAirTrafficController _trafficController;
+        private ITrafficController _trafficController;
         private ILogger _logger;
+        private string _logFile;
         
         
         [SetUp]
         public void Outputter_Setup() 
         {
             _outputter = new AirTrafficOutputter();
-           
-            /*_airspace = FakeAirspaceGenerator.GetAirspace(10,10,10);
-            _trafficController = new FakeConsoleAirTrafficController();
-            _tracks = new List<ITrack>();
-            _condtions = new List<Condtion>();
-            _logger = new FileLogger();
+            _airspace = FakeAirspaceGenerator.GetAirspace(100, 100, 100);
             
-            var track1 = FakeTrackFactory.GetTrackWithTag("Tag1", 1, 2, 3);
-            var track2 = FakeTrackFactory.GetTrackWithTag("Tag2", 4, 5, 6);
+            _logFile = "../../Test.txt";
             
-            _tracks.Add(track1);
-            _tracks.Add(track2);
 
-            var condition = new Condtion {Track1 = track1, Track2 = track2};
 
-            _condtions.Add(condition);*/
-            
         }
         
-
-
+        [TearDown]
+        public void FileLogger_Cleanup()
+        {
+            File.Delete(_logFile);
+        }
+        
+        
         [Test]
         public void SetLoggerTest()
         {
@@ -61,18 +58,84 @@ namespace SWT_TEAM22_ATM.Test.Unit
         }
 
 
-        /*[Test]
-        public void ConditionDetectedTest()
+        [TestCase(10)]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(3)]
+        public void ConditionDetectedTestLogger(int num)
         {
+            
+            _logger = Substitute.For<ILogger>();
+            
+            _trafficController = new ConsoleAirTrafficController();
+                
+            _outputter.Logger = _logger;
             _outputter.TrafficController = _trafficController;
-            _outputter.ConditionDetected(_condtions, _airspace);
-
-            var condition = _condtions.First();
-
-            var compare = "Condition detected between " + condition.Track1.Tag + " & " + condition.Track2.Tag;
             
             
-            StringAssert.Contains(compare,_trafficController.Condition);
-        }*/
+            _outputter.ConditionDetected(FakeConditionFactory.CreateConditionList(num));
+
+
+            _outputter.Logger.Received(num).LogCondition(Arg.Any<ITrack>(), Arg.Any<ITrack>());
+
+        }
+        
+        /*
+        [TestCase(10)]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(3)]
+        public void ConditionDetectedTestDisplay(int num)
+        {
+            
+            _logger = new FileLogger();
+
+            _trafficController = Substitute.For<ConsoleAirTrafficController>();
+                
+            _outputter.Logger = _logger;
+            _outputter.TrafficController = _trafficController;
+            
+            _tracks = FakeTrackFactory.GetMultipleTracksWithTags(num * 2);
+
+            _airspace.Trackables = _tracks;
+            
+            
+            _outputter.ConditionDetected();
+
+
+            _outputter.TrafficController.Received(1).DisplayTracks(_tracks);
+        }
+        */
+        
+        [TestCase(10)]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(3)]
+        public void UpdateTrackDisplayTest(int num)
+        {
+            
+            _logger = new FileLogger();
+
+            _trafficController = Substitute.For<ConsoleAirTrafficController>();
+                
+            _outputter.Logger = _logger;
+            _logger.PathToFile = _logFile;
+            
+            _outputter.TrafficController = _trafficController;
+
+            _tracks =  FakeTrackFactory.GetMultipleTracksWithTags(num);
+
+            _airspace.Trackables = _tracks;
+            
+            
+            _outputter.UpdateTrackDisplay(_airspace);
+
+
+            _outputter.TrafficController.Received(1).DisplayTracks(_tracks);
+
+        }
+
+
+        
     }
 }

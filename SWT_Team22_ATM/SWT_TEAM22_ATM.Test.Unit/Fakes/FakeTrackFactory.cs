@@ -28,6 +28,26 @@ namespace SWT_TEAM22_ATM.Test.Unit
                 TrackPosition =  new Position(x,y,z)
             };
         }
-        
+
+        public static List<ITrack> GetMultipleTracksWithTags(int number)
+        {
+            var rand = new Random();
+            var tracks = new List<ITrack>();
+
+            for (int i = 0; i < number; i++)
+            {
+                var x = rand.Next(1, 100);
+                var y = rand.Next(1, 100);
+                var z = rand.Next(1, 100);
+
+
+                tracks.Add(FakeTrackFactory.GetTrackWithTag("Track " + i+1, x, y, z));
+               
+            }
+
+            return tracks;
+            
+        }
+
     }
 }

@@ -10,7 +10,7 @@ namespace SWT_Team22_ATM.Validation
     public class TrackAirspaceValidator : IValidator
     {
 
-        public bool Validate(ITrack track, Airspace airspace)//returns true if already Tracked
+        public bool Validate(ITrack track, ITrackable airspace)//returns true if already Tracked
         {
             return airspace.Trackables.All(t => IsTrackAlreadyRegistered(t, track)) == false;
         }
