@@ -39,7 +39,8 @@ namespace SWT_TEAM22_ATM.Test.Unit
         [Test]
         public void LogConditionCreateFile_Test()
         {
-            _logger.LogCondition(_track1,_track2,_logFile);
+            _logger.PathToFile = _logFile;
+            _logger.LogCondition(_track1,_track2);
             
             Assert.True(File.Exists(_logFile));
         }
@@ -48,7 +49,8 @@ namespace SWT_TEAM22_ATM.Test.Unit
         [Test]
         public void LogCondition_Test()
         {
-            _logger.LogCondition(_track1,_track2,_logFile);
+            _logger.PathToFile = _logFile;
+            _logger.LogCondition(_track1,_track2);
             string text;
             using (var streamReader = new StreamReader(new FileStream(_logFile, FileMode.Open, FileAccess.Read)))
             {
