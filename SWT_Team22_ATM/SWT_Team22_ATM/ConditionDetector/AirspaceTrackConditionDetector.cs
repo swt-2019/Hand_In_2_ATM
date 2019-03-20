@@ -17,12 +17,16 @@ namespace SWT_Team22_ATM.ConditionDetector
             ConditionToCheckFor = conditionsToCheckFor;
         }
 
-        public void DetectCondition(ITrackable trackable, ITrack toTrack)
+        public void DetectCondition(ITrackable trackable)
         {
-            trackable.Trackables.ForEach(track =>
+            var tracksToCheck = trackable.Trackables;
+            for (int i = 0; i < tracksToCheck.Count; i++)
             {
-                DetectTrackOnTrackCondition(toTrack,track);
-            });
+                for (int j = i + 1; j < tracksToCheck.Count; j++)
+                {
+                    DetectTrackOnTrackCondition(tracksToCheck[i],tracksToCheck[j]);
+                }
+            }
         }
 
         public void DetectTrackOnTrackCondition(ITrack firstTrack, ITrack secondTrack)

@@ -11,7 +11,11 @@ namespace SWT_TEAM22_ATM.Test.Unit.TestMonitors
 {
     public class TraffikMonitorFake : ITrafficMonitor
     {
-        public Airspace Airspace { get; set; }
+        public ITrackable Airspace { get; set; }
 
+        public void Update(ITrack track)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

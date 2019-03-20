@@ -10,9 +10,9 @@ namespace SWT_Team22_ATM.Validation
     public class PositionAirspaceValidator : IValidator
     {
         private ITrack _track;
-        private Airspace _airspace;
+        private ITrackable _airspace;
 
-        public bool Validate(ITrack track, Airspace airspace)
+        public bool Validate(ITrack track, ITrackable airspace)
         {
             _track = track;
             _airspace = airspace;
