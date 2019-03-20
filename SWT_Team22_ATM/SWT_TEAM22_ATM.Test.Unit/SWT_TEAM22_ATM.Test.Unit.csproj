@@ -59,10 +59,10 @@
   <ItemGroup>
     <Compile Include="ConditionDetectorTest\AirspaceTrackConditionDetectorTest.cs" />
     <Compile Include="ConditionDetectorTest\TrackHorizontalDistanceConditionTest.cs" />
-    <Compile Include="FakeAirspaceGenerator.cs" />
-    <Compile Include="FakeConditionFactory.cs" />
-    <Compile Include="FakeTrackFactory.cs" />
+    <Compile Include="Fakes\FakeAirspaceGenerator.cs" />
+    <Compile Include="Fakes\FakeConditionFactory.cs" />
     <Compile Include="ConditionDetectorTest\TrackAltitudeConditionTest.cs" />
+    <Compile Include="Fakes\FakeTrackFactory.cs" />
     <Compile Include="OutputterFakes\FakeConsoleAirTrafficController.cs" />
     <Compile Include="OutputterTests\ConsoleAirTrafficControllerTests.cs" />
     <Compile Include="OutputterTests\FileLoggerTests.cs" />
