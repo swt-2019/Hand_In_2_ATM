@@ -6,12 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.Validation;
-
+using TransponderReceiver;
 namespace SWT_Team22_ATM.interpreter
 {
-    class TransponderDataInterpreter : Iinterpret, IValidateEvent
+   public class TransponderDataInterpreter : Iinterpret, TrackListEvent
     {
-        public Track interpret(string TransponderData)
+        public event EventHandler<TrackListEventArgs> TrackListEventHandler;
+
+        public void subscribe(EventHandler<RawTransponderDataEventArgs> handler)
+        {
+            handler += interpret;
+        }
+        private void interpret(object sender, RawTransponderDataEventArgs e)
+        {
+            List<Track> Tracks = new List<Track>();
+            foreach(var data in e.TransponderData)
+            {
+                Tracks.Add(interpret(data));
+            }
+
+        }
+
+        private Track interpret(string TransponderData)
         {
             // ATR423;39045;12932;14000;20151006213456789 
 
@@ -54,12 +70,12 @@ namespace SWT_Team22_ATM.interpreter
 
         }
 
-
-        public event EventHandler<ValidateEventArgs> ValidationEvent;
+        
 
         protected virtual void OnNewTag(ValidateEventArgs e)
         {
-            ValidationEvent?.Invoke(this,e);
+            TrackListEventHandler?.Invoke(this,e);
         }
+
     }
 }

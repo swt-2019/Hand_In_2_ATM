@@ -9,27 +9,24 @@ using SWT_Team22_ATM.Validation;
 
 namespace SWT_Team22_ATM.Validation
 {
-    public class ValidateTransponderData : IValidateEvent
+    public class ValidateTransponderData
     {
-        public event EventHandler<ValidateEventArgs> ValidationEvent;
+
 
         PositionAirspaceValidator psAirspaceValidator = new PositionAirspaceValidator();
 
 
-        public ValidateTransponderData(ref IValidateEvent validateEvent)
+        private ITrafficMonitor _monitor;
+
+        public ValidateTransponderData(ref IValidateEvent validateEvent, Monitors.ITrafficMonitor monitor)
         {
             validateEvent.ValidationEvent += OnNewValidation;
+            _monitor = monitor;
         }
-
-
-        private ITrafficMonitor monitor;
-
-
-
 
         private void OnNewValidation(object sender, ValidateEventArgs e)
         {
-            psAirspaceValidator?.Validate(e.Track, monitor.Airspace);
+            psAirspaceValidator.Validate(e.Track, _monitor.Airspace);
         }
     }
 }
