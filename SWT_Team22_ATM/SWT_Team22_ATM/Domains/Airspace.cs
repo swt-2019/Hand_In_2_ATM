@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SWT_Team22_ATM.ConditionDetector;
 
 namespace SWT_Team22_ATM.Domains
 {
@@ -9,6 +10,6 @@ namespace SWT_Team22_ATM.Domains
         public int VerticalStart { get; set; }
         public int VerticalEnd { get; set; }
         public List<ITrack> Trackables { get; set; } = new List<ITrack>();
-        public List<ITrack> Conditions { get; set; }
+        public List<ConditionEventArgs> Conditions { get; set; }
     }
 }

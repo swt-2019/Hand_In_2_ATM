@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 
 namespace SWT_Team22_ATM
@@ -8,10 +9,8 @@ namespace SWT_Team22_ATM
     {
         ILogger Logger { get; set; }
         ITrafficController TrafficController { get; set; }
-
-        string PathToFile { get; set; }
         
-        void ConditionDetected(List<Condtion> condtions, Airspace airspace);
+        void ConditionDetected(List<ConditionEventArgs> conditions);
         void UpdateTrackDisplay(Airspace airspace);
     }
 }

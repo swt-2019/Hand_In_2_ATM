@@ -28,8 +28,6 @@ namespace SWT_TEAM22_ATM.Test.Unit
             
             _logFile = "../../Test.txt";
             
-            
-            _outputter.PathToFile = _logFile;
 
 
         }
@@ -75,14 +73,14 @@ namespace SWT_TEAM22_ATM.Test.Unit
             _outputter.TrafficController = _trafficController;
             
             
-            _outputter.ConditionDetected(FakeConditionFactory.CreateConditionList(num), _airspace);
+            _outputter.ConditionDetected(FakeConditionFactory.CreateConditionList(num));
 
 
-            _outputter.Logger.Received(num).LogCondition(Arg.Any<ITrack>(), Arg.Any<ITrack>(), Arg.Any<string>());
+            _outputter.Logger.Received(num).LogCondition(Arg.Any<ITrack>(), Arg.Any<ITrack>());
 
         }
         
-        
+        /*
         [TestCase(10)]
         [TestCase(1)]
         [TestCase(0)]
@@ -102,12 +100,12 @@ namespace SWT_TEAM22_ATM.Test.Unit
             _airspace.Trackables = _tracks;
             
             
-            _outputter.ConditionDetected(FakeConditionFactory.CreateConditionList(num), _airspace);
+            _outputter.ConditionDetected();
 
 
             _outputter.TrafficController.Received(1).DisplayTracks(_tracks);
         }
-        
+        */
         
         [TestCase(10)]
         [TestCase(1)]
@@ -121,6 +119,8 @@ namespace SWT_TEAM22_ATM.Test.Unit
             _trafficController = Substitute.For<ConsoleAirTrafficController>();
                 
             _outputter.Logger = _logger;
+            _logger.PathToFile = _logFile;
+            
             _outputter.TrafficController = _trafficController;
 
             _tracks =  FakeTrackFactory.GetMultipleTracksWithTags(num);

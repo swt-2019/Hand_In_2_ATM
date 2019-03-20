@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Policy;
+using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 
 namespace SWT_Team22_ATM
@@ -16,14 +17,12 @@ namespace SWT_Team22_ATM
             }
         }
 
-        public void DisplayConditions(List<Condtion> conditions, List<ITrack> trackables)
+        public void DisplayConditions(List<ConditionEventArgs> conditions)
         {
             foreach (var condition in conditions)
             {
-                Console.WriteLine("Condition detected between " + condition.Track1.Tag + " & " + condition.Track2.Tag);
+                Console.WriteLine("Condition detected between " + condition.FirstConditionHolder.Tag + " & " + condition.SecondConditionHolder.Tag);
             }
-            
-            DisplayTracks(trackables);
         }
     }
 }

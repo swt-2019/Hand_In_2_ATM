@@ -58,7 +58,9 @@
     <Compile Include="Domains\Track.cs" />
     <Compile Include="interpreter\Iinterpret.cs" />
     <Compile Include="interpreter\TransponderDataInterpreter.cs" />
+    <Compile Include="Monitors\AirTrafficMonitor.cs" />
     <Compile Include="Monitors\ITrafficMonitor.cs" />
+    <Compile Include="Monitors\ValidationTypeFlag.cs" />
     <Compile Include="Outputter\AirTrafficOutputter.cs" />
     <Compile Include="Outputter\ConsoleAirTrafficController.cs" />
     <Compile Include="Outputter\FileLogger.cs" />

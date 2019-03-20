@@ -9,6 +9,7 @@ namespace SWT_Team22_ATM.Monitors
 {
     public interface ITrafficMonitor
     {
-        Airspace Airspace { get; set; }
+        ITrackable Airspace { get; set; }
+        void Update(ITrack track);
     }
 }

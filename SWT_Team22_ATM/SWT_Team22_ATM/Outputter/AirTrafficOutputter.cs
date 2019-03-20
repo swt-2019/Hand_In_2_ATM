@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 
 namespace SWT_Team22_ATM
@@ -11,13 +12,13 @@ namespace SWT_Team22_ATM
         public ITrafficController TrafficController { get; set; }
 
         public string PathToFile { get; set; }
-        public void ConditionDetected(List<Condtion> condtions, Airspace airspace)
-        {
-            foreach (var condtion in condtions)
+        public void ConditionDetected(List<ConditionEventArgs> conditions)
+        {   
+            foreach (var condtion in conditions)
             {
-                Logger.LogCondition(condtion.Track1, condtion.Track2, PathToFile);
+                Logger.LogCondition(condtion.FirstConditionHolder, condtion.SecondConditionHolder);
             }
-            TrafficController.DisplayConditions(condtions, airspace.Trackables);
+            TrafficController.DisplayConditions(conditions);
         }
 
         public void UpdateTrackDisplay(Airspace airspace)

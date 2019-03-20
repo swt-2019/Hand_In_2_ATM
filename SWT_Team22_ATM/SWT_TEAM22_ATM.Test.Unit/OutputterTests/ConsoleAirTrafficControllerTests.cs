@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using NSubstitute.Extensions;
 using NUnit.Framework;
 using SWT_Team22_ATM;
+using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 
 namespace SWT_TEAM22_ATM.Test.Unit
@@ -12,13 +13,13 @@ namespace SWT_TEAM22_ATM.Test.Unit
     {
         private FakeConsoleAirTrafficController _trafficController;
         private List<ITrack> _tracks;
-        private List<Condtion> _condtions;
+        private List<ConditionEventArgs> _condtions;
 
         [SetUp]
         public void ConsoleAirTrafficController_Setup() 
         {
             _tracks = new List<ITrack>();
-            _condtions = new List<Condtion>();
+            _condtions = new List<ConditionEventArgs>();
             _trafficController = new FakeConsoleAirTrafficController();
         }
 
@@ -50,18 +51,15 @@ namespace SWT_TEAM22_ATM.Test.Unit
             
             _tracks.Add(track1);
             _tracks.Add(track2);
-            
-            var condition = new Condtion();
-            
-            condition.Track1 = track1;
-            condition.Track2 = track2;
-            
-            
+
+            var condition = new ConditionEventArgs(track1, track2);
             _condtions.Add(condition);
+
+
             
             
 
-            _trafficController.DisplayConditions(_condtions, _tracks);
+            _trafficController.DisplayConditions(_condtions);
 
             var compare = "Condition detected between " + track1.Tag + " & " + track2.Tag;
 
