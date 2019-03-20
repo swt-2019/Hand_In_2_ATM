@@ -1,30 +1,36 @@
 ﻿using System.Collections.Generic;
 using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
+using SWT_Team22_ATM.Validation;
 
 namespace SWT_Team22_ATM.Monitors
 {
     public class AirTrafficMonitor : ITrafficMonitor
     {
-        public AirTrafficMonitor()
+        private readonly IValidateEvent _validator;
+        private readonly IConditionDetector _conditionDetector;
+        private IOutputter _outputter;
+        public AirTrafficMonitor(IValidateEvent validator, IConditionDetector conditionDetector, IOutputter outputter)
         {
-            ConditionDetector.ConditionsHandler += ConditionDetector_ConditionsHandler;
+            _validator = validator;
+            _validator.ValidationEvent += Update;
+            _conditionDetector = conditionDetector;
+            _conditionDetector.ConditionsHandler += ConditionDetector_ConditionsHandler;
+            _outputter = outputter;
         }
-
-        public List<ConditionEventArgs> ConditionsList { get; set; }
+        
         public ITrackable Airspace { get; set; }
-        public IConditionDetector ConditionDetector { get; set; }
-        public IOutputter Outputter { get; set; }
-        public void Update(ITrack track)
+        public List<ConditionEventArgs> Conditions { get; set; }
+        public void Update(object sender, ValidateEventArgs e)
         {
             throw new System.NotImplementedException();
         }
 
         private void ConditionDetector_ConditionsHandler(object sender, ConditionEventArgs e)
         {
-            if (ConditionsList.Exists(c => c == e) == true)
-                return;
-
+            Conditions.Add(e);
+            //Outputter.Logger.LogCondition(e.FirstConditionHolder,e.SecondConditionHolder);
+            //Outputter.(Airspace);
         }
     }
 }
