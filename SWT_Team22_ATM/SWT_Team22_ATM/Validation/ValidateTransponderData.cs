@@ -13,10 +13,9 @@ namespace SWT_Team22_ATM.Validation
     {
         public event EventHandler<ValidateEventArgs> ValidationEvent;
 
-        PositionAirspaceValidator psAirspaceValidator = new PositionAirspaceValidator();
+        private readonly PositionAirspaceValidator _positionAirspaceValidator = new PositionAirspaceValidator();
 
-
-        public ValidateTransponderData(ref IValidateEvent validateEvent)
+        public ValidateTransponderData(IValidateEvent validateEvent)
         {
             validateEvent.ValidationEvent += OnNewValidation;
         }
@@ -25,11 +24,9 @@ namespace SWT_Team22_ATM.Validation
         private ITrafficMonitor monitor;
 
 
-
-
         private void OnNewValidation(object sender, ValidateEventArgs e)
         {
-            psAirspaceValidator?.Validate(e.Track, monitor.Airspace);
+            e.TrackList.ForEach(track => _positionAirspaceValidator?.Validate(track, monitor.Airspace));
         }
     }
 }
