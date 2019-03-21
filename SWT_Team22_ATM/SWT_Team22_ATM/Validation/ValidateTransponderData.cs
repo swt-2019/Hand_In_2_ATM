@@ -13,20 +13,20 @@ namespace SWT_Team22_ATM.Validation
     {
 
 
-        PositionAirspaceValidator psAirspaceValidator = new PositionAirspaceValidator();
+        //    PositionAirspaceValidator psAirspaceValidator = new PositionAirspaceValidator();
 
 
-        private ITrafficMonitor _monitor;
+        //    private ITrafficMonitor _monitor;
 
-        public ValidateTransponderData(ref IValidateEvent validateEvent, Monitors.ITrafficMonitor monitor)
-        {
-            validateEvent.ValidationEvent += OnNewValidation;
-            _monitor = monitor;
-        }
+        //    public ValidateTransponderData(ref IValidateEvent validateEvent, Monitors.ITrafficMonitor monitor)
+        //    {
+        //        validateEvent.ValidationEvent += OnNewValidation;
+        //        _monitor = monitor;
+        //    }
 
-        private void OnNewValidation(object sender, ValidateEventArgs e)
-        {
-            psAirspaceValidator.Validate(e.Track, _monitor.Airspace);
-        }
+        //    private void OnNewValidation(object sender, ValidateEventArgs e)
+        //    {
+        //        psAirspaceValidator.Validate(e.Track, _monitor.Airspace);
+        //    }
     }
 }

@@ -13,7 +13,7 @@ namespace SWT_Team22_ATM.Monitors
         public AirTrafficMonitor(IValidateEvent validator, IConditionDetector conditionDetector, IOutputter outputter)
         {
             _validator = validator;
-            _validator.ValidationEvent += Update;
+            //_validator.ValidationEvent += Update;
             _conditionDetector = conditionDetector;
             _conditionDetector.ConditionsHandler += ConditionDetector_ConditionsHandler;
             _outputter = outputter;

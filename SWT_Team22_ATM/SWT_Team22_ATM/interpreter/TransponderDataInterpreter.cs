@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,17 +14,22 @@ namespace SWT_Team22_ATM.interpreter
     {
         public event EventHandler<TrackListEventArgs> TrackListEventHandler;
 
-        public void subscribe(EventHandler<RawTransponderDataEventArgs> handler)
+        public void subscribe(ref EventHandler<RawTransponderDataEventArgs> handler)
         {
-            handler += interpret;
+            handler += interpretList;
         }
-        private void interpret(object sender, RawTransponderDataEventArgs e)
+        private void interpretList(object sender, RawTransponderDataEventArgs e)
         {
             List<Track> Tracks = new List<Track>();
             foreach(var data in e.TransponderData)
             {
                 Tracks.Add(interpret(data));
             }
+
+            TrackListEventArgs args = new TrackListEventArgs();
+            args.Tracks = Tracks;
+
+            TrackListEventHandler.Invoke(this,args);
 
         }
 
@@ -61,10 +67,7 @@ namespace SWT_Team22_ATM.interpreter
 
             t.TimeStamp = s[4];
 
-            OnNewTag(new ValidateEventArgs()
-            {
-                Track = t
-            });
+           
 
             return t;
 
@@ -72,10 +75,7 @@ namespace SWT_Team22_ATM.interpreter
 
         
 
-        protected virtual void OnNewTag(ValidateEventArgs e)
-        {
-            TrackListEventHandler?.Invoke(this,e);
-        }
+
 
     }
 }
