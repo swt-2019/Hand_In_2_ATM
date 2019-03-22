@@ -73,7 +73,7 @@
     <Compile Include="TransponderReceiver.cs" />
     <Compile Include="Updater\AirspaceUpdater.cs" />
     <Compile Include="Updater\ICalculateTracks\ITrackCalculator.cs" />
-    <Compile Include="Updater\ICalculateTracks\TrackDistanceCalculator.cs" />
+    <Compile Include="Updater\ICalculateTracks\TrackHorizontalDistanceCalculator.cs" />
     <Compile Include="Updater\ICalculateTracks\TrackSpeedCalculator.cs" />
     <Compile Include="Updater\ICalculateTracks\TrackTrajectoryCalculator.cs" />
     <Compile Include="Updater\IUpdater.cs" />

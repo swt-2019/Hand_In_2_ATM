@@ -16,10 +16,5 @@ namespace SWT_TEAM22_ATM.Test.Unit.TestMonitors
         {
             throw new NotImplementedException();
         }
-
-        public void Update(object sender, ValidateEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

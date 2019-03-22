@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculatorTest\TrackHorizontalDistanceCalculatorTest.cs" />
+    <Compile Include="CalculatorTest\TrackSpeedCalculatorTest.cs" />
     <Compile Include="ConditionDetectorTest\AirspaceTrackConditionDetectorTest.cs" />
     <Compile Include="ConditionDetectorTest\TrackHorizontalDistanceConditionTest.cs" />
     <Compile Include="Fakes\FakeAirspaceGenerator.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="TransponderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdaterTest\AirspaceUpdaterTest.cs" />
-    <Compile Include="ValidateTransponderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

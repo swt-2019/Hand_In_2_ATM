@@ -4,5 +4,9 @@
     {
         Position TrackPosition { get; set; }
         string Tag { get; set; }
+
+        string TimeStamp { get; set; }
+        double Speed { get; set; }
+        int Course { get; set; }
     }
 }
