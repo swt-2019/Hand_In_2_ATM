@@ -9,7 +9,9 @@ namespace SWT_Team22_ATM.Validation
 {
     public class ValidateEventArgs : EventArgs
     {
-        public List<Track> TrackList { get; set; }
+        public List<Track> NewInAirspace { get; set; }
+        public List<Track> NotInAirspaceButUsedToBe { get; set; }
+        public List<Track> StillInAirspace { get; set; }
 
     }
 }

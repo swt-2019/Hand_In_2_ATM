@@ -9,32 +9,37 @@ namespace SWT_Team22_ATM.Validation
 {
     public class PositionAirspaceValidator : IValidator
     {
+        public ITrack Track { get=>_track; set => _track = value; }
+        public ITrackable Trackable { get=>_airspace; set=>_airspace =value; }
         private ITrack _track;
         private ITrackable _airspace;
 
         public bool Validate(ITrack track, ITrackable airspace)
         {
-            _track = track;
-            _airspace = airspace;
+            Track = track;
+            Trackable = airspace;
             return IsTrackInAirspace();
         }
 
-        private bool IsTrackInAirspace()
+        public bool IsTrackInAirspace()
         {
-
-            return IsTrackXCoordinateInAirspaceArea() & IsTrackYCoordinateInAirspaceArea();
+            return IsTrackXCoordinateInAirspaceArea() && IsTrackYCoordinateInAirspaceArea() && IsTrackZCoordinateInAirspaceArea();
         }
 
-        private bool IsTrackXCoordinateInAirspaceArea()
+        public bool IsTrackXCoordinateInAirspaceArea()
         {
-            return _track.TrackPosition.XCoordinate < _airspace.AirspacePosition.XCoordinate &&
-                   _track.TrackPosition.XCoordinate > _airspace.AirspacePosition.XCoordinate;
+            return _track.TrackPosition.XCoordinate < _airspace.HorizontalSize && (_track.TrackPosition.XCoordinate > _airspace.AirspacePosition.XCoordinate);
         }
 
-        private bool IsTrackYCoordinateInAirspaceArea()
+        public bool IsTrackYCoordinateInAirspaceArea()
         {
-            return _track.TrackPosition.YCoordinate < _airspace.AirspacePosition.YCoordinate &&
-                   _track.TrackPosition.YCoordinate > _airspace.AirspacePosition.YCoordinate;
+            return _track.TrackPosition.YCoordinate < _airspace.HorizontalSize && (_track.TrackPosition.YCoordinate > _airspace.AirspacePosition.YCoordinate);
+        }
+
+        public bool IsTrackZCoordinateInAirspaceArea()
+        {
+            return _track.TrackPosition.ZCoordinate > _airspace.VerticalStart &&
+                   (_track.TrackPosition.ZCoordinate < _airspace.VerticalEnd);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
             return new Airspace()
             {
                 AirspacePosition = new Position(x,y,z),
-                VerticalStart = 500,
+                VerticalStart = z,
                 VerticalEnd = 5000,
                 HorizontalSize = 80000
             };
