@@ -11,12 +11,14 @@ using TransponderReceiver;
 
 namespace SWT_Team22_ATM.Validation
 {
-    public class ValidateTransponderData : ITrafficMonitor, IValidateEvent
+    public class ValidateTransponderData : IValidateEvent
     {
-        private readonly PositionAirspaceValidator _airspaceValidator = new PositionAirspaceValidator();
-        private readonly TrackAirspaceValidator _trackAirspaceValidator = new TrackAirspaceValidator();
+        private readonly IValidator _airspaceValidator = new PositionAirspaceValidator();
+        private readonly IValidator _trackAirspaceValidator = new TrackAirspaceValidator();
 
         public event EventHandler<ValidateEventArgs> ValidationCompleteEventHandler;
+
+        public ITrackable Airspace;
 
         public ValidateTransponderData(ITrackable airspace)
         {
@@ -28,32 +30,62 @@ namespace SWT_Team22_ATM.Validation
             trackListEventHandler += OnNewValidation;
         }
 
-        private void OnNewValidation(object sender, TrackListEventArgs e)
+        public void OnNewValidation(object sender, TrackListEventArgs e)
         {
+
+            var validateEventArgs = new ValidateEventArgs();
+            
             foreach (var track in e.Tracks)
             {
-                if (_airspaceValidator.Validate(track, Airspace).Equals(false))// checks if tracks are in airspace. false -> remove track
+                var isInAirspace = _airspaceValidator.Validate(track, Airspace);// checks if tracks are in airspace. false -> remove track
+                var hasBeenInAirspace = _trackAirspaceValidator.Validate(track, Airspace);// check if track already us tracked
+                if (HasBeenAndIsStillInAirspace(hasBeenInAirspace, isInAirspace))
                 {
-                    e.Tracks.Remove(track);
+                    validateEventArgs.StillInAirspace.Add(track);// has been and still is
+                }
+                else if (HasNotBeenButIsInAirspace(hasBeenInAirspace,isInAirspace))
+                {
+                    validateEventArgs.NewInAirspace.Add(track);// has not been, but is now
+                }
+                else if(HasBeenInAirspaceButIsNotAnymore(hasBeenInAirspace,isInAirspace))
+                {
+                    validateEventArgs.NotInAirspaceButUsedToBe.Add(track);// has been there but is not anymore 
                 }
             }
 
-            foreach (var track in e.Tracks)//in the tracks IN airspace, are we already tracking them or not? Not tracking, add them
-            {
-                if (_trackAirspaceValidator.Validate(track, Airspace).Equals(false))
-                {
-                    Airspace.Trackables.Add(track);
-                }
-            }
+            ValidationCompleteEventHandler?.Invoke(this, validateEventArgs);
 
-            ValidationCompleteEventHandler += Update;
 
         }
 
-        public ITrackable Airspace { get; set; }
-        public void Update(object sender, ValidateEventArgs e)
+        public bool HasBeenAndIsStillInAirspace(bool hasBeen, bool isIn)
         {
-            ValidationCompleteEventHandler?.Invoke(this, e);
+            if (hasBeen && isIn)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool HasNotBeenButIsInAirspace(bool hasBeen, bool isIn)
+        {
+            if (hasBeen.Equals(false) || isIn)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool HasBeenInAirspaceButIsNotAnymore(bool hasBeen, bool isIn)
+        {
+            if (hasBeen || isIn.Equals(false))
+            {
+                return true;
+            }
+
+            return false;
         }
 
     }
