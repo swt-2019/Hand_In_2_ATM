@@ -47,7 +47,7 @@ namespace SWT_Team22_ATM.interpreter
 
             OnNewTag(new ValidateEventArgs()
             {
-                Track = t
+                //Track = t
             });
 
             return t;

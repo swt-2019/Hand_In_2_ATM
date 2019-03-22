@@ -69,6 +69,12 @@
     <Compile Include="Outputter\ITrafficController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransponderReceiver.cs" />
+    <Compile Include="Updater\AirspaceUpdater.cs" />
+    <Compile Include="Updater\ICalculateTracks\ITrackCalculator.cs" />
+    <Compile Include="Updater\ICalculateTracks\TrackDistanceCalculator.cs" />
+    <Compile Include="Updater\ICalculateTracks\TrackSpeedCalculator.cs" />
+    <Compile Include="Updater\ICalculateTracks\TrackTrajectoryCalculator.cs" />
+    <Compile Include="Updater\IUpdater.cs" />
     <Compile Include="Validation\IValidateEvent.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\PositionAirspaceValidator.cs" />
@@ -76,5 +82,6 @@
     <Compile Include="Validation\ValidateEventArgs.cs" />
     <Compile Include="Validation\ValidateTransponderData.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
