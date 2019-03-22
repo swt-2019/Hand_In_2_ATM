@@ -9,6 +9,6 @@ namespace SWT_Team22_ATM.Validation
 {
     public interface IValidateEvent
     {
-
+        event EventHandler<ValidateEventArgs> ValidationCompleteEventHandler;
     }
 }

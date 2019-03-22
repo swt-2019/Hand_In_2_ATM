@@ -29,7 +29,7 @@ namespace SWT_Team22_ATM.interpreter
             TrackListEventArgs args = new TrackListEventArgs();
             args.Tracks = Tracks;
 
-            TrackListEventHandler.Invoke(this,args);
+            TrackListEventHandler?.Invoke(this,args);
 
         }
 

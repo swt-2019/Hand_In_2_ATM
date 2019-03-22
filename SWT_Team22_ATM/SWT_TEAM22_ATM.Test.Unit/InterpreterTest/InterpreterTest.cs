@@ -29,7 +29,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
             //subscribe handler interpreter event
             interpreter.subscribe(ref handler);
 
-            numberOfTimesHandlerRun = 0;
+            //numberOfTimesHandlerRun = 0;
             
 
             //setup event listener
