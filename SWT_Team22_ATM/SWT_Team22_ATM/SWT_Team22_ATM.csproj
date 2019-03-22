@@ -57,6 +57,8 @@
     <Compile Include="Domains\Position.cs" />
     <Compile Include="Domains\Track.cs" />
     <Compile Include="interpreter\Iinterpret.cs" />
+    <Compile Include="interpreter\TrackListEvent.cs" />
+    <Compile Include="interpreter\TrackListEventArgs.cs" />
     <Compile Include="interpreter\TransponderDataInterpreter.cs" />
     <Compile Include="Monitors\AirTrafficMonitor.cs" />
     <Compile Include="Monitors\ITrafficMonitor.cs" />

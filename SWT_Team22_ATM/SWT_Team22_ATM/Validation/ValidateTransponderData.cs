@@ -4,29 +4,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SWT_Team22_ATM.Domains;
+using SWT_Team22_ATM.interpreter;
 using SWT_Team22_ATM.Monitors;
 using SWT_Team22_ATM.Validation;
+using TransponderReceiver;
 
 namespace SWT_Team22_ATM.Validation
 {
-    public class ValidateTransponderData : IValidateEvent
+    public class ValidateTransponderData : ITrafficMonitor, IValidateEvent
     {
-        public event EventHandler<ValidateEventArgs> ValidationEvent;
+        private readonly PositionAirspaceValidator _airspaceValidator = new PositionAirspaceValidator();
+        private readonly TrackAirspaceValidator _trackAirspaceValidator = new TrackAirspaceValidator();
 
-        private readonly PositionAirspaceValidator _positionAirspaceValidator = new PositionAirspaceValidator();
+        public event EventHandler<ValidateEventArgs> ValidationCompleteEventHandler;
 
-        public ValidateTransponderData(IValidateEvent validateEvent)
+        public ValidateTransponderData(ITrackable airspace)
         {
-            validateEvent.ValidationEvent += OnNewValidation;
+            Airspace = airspace;
         }
 
-
-        private ITrafficMonitor monitor;
-
-
-        private void OnNewValidation(object sender, ValidateEventArgs e)
+        public ValidateTransponderData(ref EventHandler<TrackListEventArgs> trackListEventHandler)
         {
-            e.TrackList.ForEach(track => _positionAirspaceValidator?.Validate(track, monitor.Airspace));
+            trackListEventHandler += OnNewValidation;
         }
+
+        private void OnNewValidation(object sender, TrackListEventArgs e)
+        {
+            foreach (var track in e.Tracks)
+            {
+                if (_airspaceValidator.Validate(track, Airspace).Equals(false))// checks if tracks are in airspace. false -> remove track
+                {
+                    e.Tracks.Remove(track);
+                }
+            }
+
+            foreach (var track in e.Tracks)//in the tracks IN airspace, are we already tracking them or not? Not tracking, add them
+            {
+                if (_trackAirspaceValidator.Validate(track, Airspace).Equals(false))
+                {
+                    Airspace.Trackables.Add(track);
+                }
+            }
+
+            ValidationCompleteEventHandler += Update;
+
+        }
+
+        public ITrackable Airspace { get; set; }
+        public void Update(object sender, ValidateEventArgs e)
+        {
+            ValidationCompleteEventHandler?.Invoke(this, e);
+        }
+
     }
 }

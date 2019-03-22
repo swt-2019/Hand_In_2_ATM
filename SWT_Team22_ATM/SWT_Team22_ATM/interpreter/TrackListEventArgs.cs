@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using SWT_Team22_ATM.Domains;
 
-namespace SWT_Team22_ATM.Validation
+namespace SWT_Team22_ATM.interpreter
 {
-    public interface IValidateEvent
+    public class TrackListEventArgs : EventArgs
     {
-        event EventHandler<ValidateEventArgs> ValidationCompleteEventHandler;
+        public List<Track> Tracks { get; set; }
     }
 }
