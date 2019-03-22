@@ -20,12 +20,12 @@ namespace SWT_Team22_ATM.Validation
 
         public ITrackable Airspace;
 
-        public ValidateTransponderData(ITrackable airspace)
+        public ValidateTransponderData(ITrackable airspace)// burde måske samle de 2 constructors
         {
             Airspace = airspace;
         }
 
-        public ValidateTransponderData(ref EventHandler<TrackListEventArgs> trackListEventHandler)
+        public ValidateTransponderData(ref EventHandler<TrackListEventArgs> trackListEventHandler) // denne
         {
             trackListEventHandler += OnNewValidation;
         }
@@ -54,8 +54,6 @@ namespace SWT_Team22_ATM.Validation
             }
 
             ValidationCompleteEventHandler?.Invoke(this, validateEventArgs);
-
-
         }
 
         public bool HasBeenAndIsStillInAirspace(bool hasBeen, bool isIn)
