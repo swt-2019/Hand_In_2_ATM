@@ -53,7 +53,7 @@ namespace SWT_Team22_ATM.Validation
                 }
             }
 
-            ValidationCompleteEventHandler?.Invoke(this, validateEventArgs);
+            ValidationCompleteEventHandler?.Invoke(this, validateEventArgs); // Invoke
         }
 
         public bool HasBeenAndIsStillInAirspace(bool hasBeen, bool isIn)
