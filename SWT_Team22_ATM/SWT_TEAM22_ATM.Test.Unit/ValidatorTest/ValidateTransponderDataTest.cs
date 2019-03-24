@@ -27,13 +27,13 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
         [SetUp]
         public void TestSetUp()
         {
-            _validationCompleteEventArgs = null;
+           _validationCompleteEventArgs = null;
 
             // setup Airspace to work on
             _airspace = FakeAirspaceGenerator.GetAirspace(50, 100, 150);
 
             // set Validator to subscribe to Interpreter(done in constructor)
-            _validateTransponderData = new ValidateTransponderData(_uutEventHandler, _airspace);
+            _validateTransponderData = new ValidateTransponderData(ref _uutEventHandler, _airspace);
 
             // setup listener
             _validateTransponderData.ValidationCompleteEventHandler += (sender, args) => { _validationCompleteEventArgs = args; };
@@ -100,9 +100,9 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
                                                                                                      track.TrackPosition.YCoordinate + " " + 
                                                                                                      track.TrackPosition.ZCoordinate));*/
 
-            _validationCompleteEventArgs.NotInAirspaceButUsedToBe.ForEach(track => Console.WriteLine(track.Tag));
+            /*_validationCompleteEventArgs.NotInAirspaceButUsedToBe.ForEach(track => Console.WriteLine(track.Tag));
             _validationCompleteEventArgs.NewInAirspace.ForEach(track => Console.WriteLine(track.Tag));
-            _validationCompleteEventArgs.StillInAirspace.ForEach(track => Console.WriteLine(track.Tag));
+            _validationCompleteEventArgs.StillInAirspace.ForEach(track => Console.WriteLine(track.Tag));*/
 
 
             Assert.Contains(track1, _validationCompleteEventArgs.NotInAirspaceButUsedToBe);

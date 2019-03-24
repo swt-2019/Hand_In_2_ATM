@@ -20,12 +20,7 @@ namespace SWT_Team22_ATM.Validation
 
         public ITrackable Airspace;
 
-        /*public ValidateTransponderData(ITrackable airspace)// burde måske samle de 2 constructors
-        {
-            Airspace = airspace;
-        }*/
-
-        public ValidateTransponderData(EventHandler<TrackListEventArgs> trackListEventHandler, ITrackable airspace) // denne
+        public ValidateTransponderData(ref EventHandler<TrackListEventArgs> trackListEventHandler, ITrackable airspace) // denne
         {
             Airspace = airspace;
             trackListEventHandler += OnNewValidation;
