@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculatorTest\TrackCourseCalculatorTest.cs" />
     <Compile Include="CalculatorTest\TrackHorizontalDistanceCalculatorTest.cs" />
     <Compile Include="CalculatorTest\TrackSpeedCalculatorTest.cs" />
     <Compile Include="ConditionDetectorTest\AirspaceTrackConditionDetectorTest.cs" />
