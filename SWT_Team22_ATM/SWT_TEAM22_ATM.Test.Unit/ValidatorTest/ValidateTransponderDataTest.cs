@@ -8,7 +8,7 @@ using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.interpreter;
 using SWT_Team22_ATM.Monitors;
 using SWT_Team22_ATM.Validation;
-using SWT_TEAM22_ATM.Test.Unit.TestMonitors;
+using SWT_TEAM22_ATM.Test.Unit;
 
 namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
 {
@@ -58,7 +58,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             _trackListEvent.TrackListEventHandler += (sender, args) => invoked = true;
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(_trackListEvent, trackListEventArgs);
 
             Assert.That(invoked);    
         }
@@ -95,7 +95,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             var trackListEventArgs = new TrackListEventArgs(tracksWithTags);
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(_trackListEvent, trackListEventArgs);
 
             Assert.Contains(track1, _validationCompleteEventArgs.StillInAirspace);
         }
@@ -120,7 +120,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             var trackListEventArgs = new TrackListEventArgs(tracksWithTags);
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(_trackListEvent, trackListEventArgs);
 
             /*_validationCompleteEventArgs.NotInAirspaceButUsedToBe.ForEach(track => Console.WriteLine(track.Tag + " " + 
                                                                                                      track.TrackPosition.XCoordinate + " " + 

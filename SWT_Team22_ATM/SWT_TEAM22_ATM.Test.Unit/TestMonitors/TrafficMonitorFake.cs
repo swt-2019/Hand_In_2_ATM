@@ -9,7 +9,7 @@ using SWT_Team22_ATM.Validation;
 
 namespace SWT_TEAM22_ATM.Test.Unit.TestMonitors
 {
-    class TrafficMonitorFake : ITrafficMonitor
+    public class TrafficMonitorFake : ITrafficMonitor
     {
         public TrafficMonitorFake(ref IValidateEvent validateEvent)
         {
