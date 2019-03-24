@@ -4,6 +4,6 @@ namespace SWT_Team22_ATM.Updater
 {
     public interface IUpdater<T>
     {
-        void Update(T needsUpdate, T update);
+        void Update(ref T needsUpdate, T update);
     }
 }

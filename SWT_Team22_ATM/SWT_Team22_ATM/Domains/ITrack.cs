@@ -7,6 +7,6 @@
 
         string TimeStamp { get; set; }
         double Speed { get; set; }
-        int Course { get; set; }
+        double Course { get; set; }
     }
 }
