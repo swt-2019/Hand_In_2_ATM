@@ -113,6 +113,10 @@ namespace SWT_TEAM22_ATM.Test.Unit.UpdaterTest
 
 
         [TestCase(0,0,0)]
+        [TestCase(1,2,3)]
+        [TestCase(-2,-3,1)]
+        [TestCase(3,3,3)]
+        [TestCase(1000,-1000,1000)]
         public void Update_TrackPositionIsUpdated_TrackPositionCorrect(int newX, int newY,int newZ)
         {
             List<ITrack> firstTracks = new List<ITrack>()
