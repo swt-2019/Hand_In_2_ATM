@@ -65,7 +65,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             
             _validateEventArgs = new ValidateEventArgs(trackList, trackList, trackList);
 
-            _validateEvent.ValidationCompleteEventHandler += Raise.EventWith(new object(), _validateEventArgs);
+            //_validateEvent.ValidationCompleteEventHandler += Raise.EventWith(new object(), _validateEventArgs);
 
             _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), _trackListEventArgs);
 
