@@ -75,7 +75,7 @@
     <Compile Include="Updater\ICalculateTracks\ITrackCalculator.cs" />
     <Compile Include="Updater\ICalculateTracks\TrackHorizontalDistanceCalculator.cs" />
     <Compile Include="Updater\ICalculateTracks\TrackSpeedCalculator.cs" />
-    <Compile Include="Updater\ICalculateTracks\TrackTrajectoryCalculator.cs" />
+    <Compile Include="Updater\ICalculateTracks\TrackCourseCalculator.cs" />
     <Compile Include="Updater\IUpdater.cs" />
     <Compile Include="Validation\IValidateEvent.cs" />
     <Compile Include="Validation\IValidator.cs" />
