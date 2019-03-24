@@ -40,7 +40,8 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void GetSetLogfile_Test()
         {
             _uutLogger.PathToFile = _logFile;
-            StringAssert.Contains(_uutLogger.PathToFile, _logFile);
+            var log = _uutLogger.PathToFile;
+            StringAssert.Contains(_uutLogger.PathToFile, log);
         }
         
         
