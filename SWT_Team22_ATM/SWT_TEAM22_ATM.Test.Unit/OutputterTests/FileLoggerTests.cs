@@ -9,7 +9,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
     [TestFixture]
     public class FileLoggerTests
     {
-        private SWT_Team22_ATM.ILogger _logger;
+        private SWT_Team22_ATM.ILogger _uutLogger;
         private string _logFile;
         private ITrack _track1;
         private ITrack _track2;
@@ -19,7 +19,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         [SetUp]
         public void FileLogger_Setup()
         {
-            _logger = new FileLogger();
+            _uutLogger = new FileLogger();
             _logFile = "../../TestLog.txt";
             
             _track1 = FakeTrackFactory.GetTrackWithTag("Tag1", 1, 2, 3);
@@ -35,12 +35,22 @@ namespace SWT_TEAM22_ATM.Test.Unit
             File.Delete(_logFile);
         }
 
+        
+        [Test]
+        public void GetSetLogfile_Test()
+        {
+            _uutLogger.PathToFile = _logFile;
+            
+            StringAssert.Contains(_uutLogger.PathToFile, _logFile);
+        }
+        
+        
 
         [Test]
         public void LogConditionCreateFile_Test()
         {
-            _logger.PathToFile = _logFile;
-            _logger.LogCondition(_track1,_track2);
+            _uutLogger.PathToFile = _logFile;
+            _uutLogger.LogCondition(_track1,_track2);
             
             Assert.True(File.Exists(_logFile));
         }
@@ -49,8 +59,8 @@ namespace SWT_TEAM22_ATM.Test.Unit
         [Test]
         public void LogCondition_Test()
         {
-            _logger.PathToFile = _logFile;
-            _logger.LogCondition(_track1,_track2);
+            _uutLogger.PathToFile = _logFile;
+            _uutLogger.LogCondition(_track1,_track2);
             string text;
             using (var streamReader = new StreamReader(new FileStream(_logFile, FileMode.Open, FileAccess.Read)))
             {

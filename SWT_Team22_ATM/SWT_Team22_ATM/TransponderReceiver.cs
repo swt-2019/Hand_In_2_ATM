@@ -8,5 +8,6 @@ namespace SWT_Team22_ATM
 {
     class TransponderReceiver
     {
+        
     }
 }

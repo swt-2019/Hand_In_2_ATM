@@ -37,7 +37,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
            _trackListEvent = Substitute.For<ITrackListEvent>();
 
              // setup Airspace to work on
-             _airspace = FakeAirspaceGenerator.GetAirspace(50, 100, 150);
+             _airspace = FakeAirspaceGenerator.GetAirspace(0, 0, 0);
 
             // set Validator to subscribe to Interpreter(done in constructor)
             _validateTransponderData = new ValidateTransponderData(ref _trackListEvent, _airspace);
@@ -73,7 +73,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             var trackListEventArgs = new TrackListEventArgs(tracksWithTags);
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(_trackListEvent, trackListEventArgs);
 
 
             CollectionAssert.AreEqual(tracksWithTags, _validationCompleteEventArgs.NewInAirspace);
@@ -109,9 +109,9 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             _validateTransponderData.Airspace.Trackables.Add(track1);
 
             // these coordinates are not in airspace
-            track1.TrackPosition.XCoordinate = 10;
-            track1.TrackPosition.YCoordinate = 20;
-            track1.TrackPosition.ZCoordinate = 30;
+            track1.TrackPosition.XCoordinate = -10;
+            track1.TrackPosition.YCoordinate = -20;
+            track1.TrackPosition.ZCoordinate = -30;
 
             // adds the same track with updated coordinates to a list
             var tracksWithTags = new List<ITrack>() { track1 };
@@ -134,6 +134,16 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
 
             Assert.Contains(track1, _validationCompleteEventArgs.NotInAirspaceButUsedToBe);
         }
+
+
+
+        [Test]
+        public void HasBeenInAirspaceButIsNotAnymore_ReturnsFalse()
+        {
+            Assert.False(_validateTransponderData.HasBeenInAirspaceButIsNotAnymore(false , false));
+        }
+        
+        
 
     }
 }
