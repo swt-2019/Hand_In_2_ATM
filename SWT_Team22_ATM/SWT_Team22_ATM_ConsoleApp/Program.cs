@@ -11,7 +11,6 @@ using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Validation;
 using SWT_Team22_ATM.Updater;
 using SWT_Team22_ATM.Updater.ICalculateTracks;
-
 using TransponderReceiver;
 
 namespace SWT_Team22_ATM_ConsoleApp
