@@ -8,7 +8,7 @@ using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.interpreter;
 using TransponderReceiver;
 using NUnit.Framework;
-using System.Diagnostics;
+using NSubstitute;
 
 namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
 {

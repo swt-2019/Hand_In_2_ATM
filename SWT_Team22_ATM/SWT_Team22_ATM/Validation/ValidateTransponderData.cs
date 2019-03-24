@@ -44,11 +44,11 @@ namespace SWT_Team22_ATM.Validation
                 {
                     validateEventArgs.StillInAirspace.Add(track);// has been and still is
                 }
-                else if (HasNotBeenButIsInAirspace(hasBeenInAirspace,isInAirspace))
+                else if (HasNotBeenButIsInAirspace(hasBeenInAirspace, isInAirspace))
                 {
                     validateEventArgs.NewInAirspace.Add(track);// has not been, but is now
                 }
-                else if(HasBeenInAirspaceButIsNotAnymore(hasBeenInAirspace,isInAirspace))
+                else if (HasBeenInAirspaceButIsNotAnymore(hasBeenInAirspace, isInAirspace))
                 {
                     validateEventArgs.NotInAirspaceButUsedToBe.Add(track);// has been there but is not anymore 
                 }
