@@ -9,15 +9,18 @@ namespace SWT_Team22_ATM.Validation
 {
     public class TrackAirspaceValidator : IValidator
     {
-
+        public ITrack Track { get; set; }
+        public ITrackable Trackable { get; set; }
         public bool Validate(ITrack track, ITrackable airspace)//returns true if already Tracked
         {
-            return airspace.Trackables.All(t => IsTrackAlreadyRegistered(t, track)) == false;
+            Track = track;
+            Trackable = airspace;
+            return Trackable.Trackables.Exists(t=>IsTrackAlreadyRegistered(Track, t));
         }
 
-        private bool IsTrackAlreadyRegistered(ITrack track, ITrack toCompareWithTag)//returns false if Tag is == Tag in the Trackable collection
+        public bool IsTrackAlreadyRegistered(ITrack track, ITrack toCompareWithTag)//returns false if Tag is == Tag in the Trackable collection
         {
-            return track.Tag != toCompareWithTag.Tag;
+            return track.Tag == toCompareWithTag.Tag;
         }
     }
 }

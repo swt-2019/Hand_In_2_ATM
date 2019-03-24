@@ -18,7 +18,16 @@ namespace SWT_TEAM22_ATM.Test.Unit
                 TrackPosition =  new Position(x,y,z)
             };
         }
-        
+
+        public static ITrack GetTrackWithTime(string time, int x, int y, int z)
+        {
+            return new Track()
+            {
+                TimeStamp = time,
+                TrackPosition = new Position(x, y, z)
+            };
+        }
+
         public static ITrack GetTrackWithTag(string tag,int x, int y, int z)
         {
             return new Track()

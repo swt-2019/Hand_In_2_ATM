@@ -20,7 +20,7 @@ namespace SWT_Team22_ATM.interpreter
         }
         private void interpretList(object sender, RawTransponderDataEventArgs e)
         {
-            List<Track> Tracks = new List<Track>();
+            List<ITrack> Tracks = new List<ITrack>();
             foreach(var data in e.TransponderData)
             {
                 Tracks.Add(interpret(data));
@@ -29,7 +29,7 @@ namespace SWT_Team22_ATM.interpreter
             TrackListEventArgs args = new TrackListEventArgs();
             args.Tracks = Tracks;
 
-            TrackListEventHandler.Invoke(this,args);
+            TrackListEventHandler?.Invoke(this,args);
 
         }
 

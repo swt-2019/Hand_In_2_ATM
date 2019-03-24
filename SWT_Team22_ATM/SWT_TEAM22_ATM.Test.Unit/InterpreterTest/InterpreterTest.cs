@@ -28,8 +28,6 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
 
             //subscribe handler interpreter event
             interpreter.subscribe(ref handler);
-            
-            
 
             //setup event listener
             interpreter.TrackListEventHandler += (o, args) => { TrackListArgs = args; };
