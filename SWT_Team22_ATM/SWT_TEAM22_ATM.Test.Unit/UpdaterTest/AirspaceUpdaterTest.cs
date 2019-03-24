@@ -62,6 +62,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.UpdaterTest
             _speedCalculator.Calculate(Arg.Any<ITrack>(),Arg.Any<ITrack>()).Returns(100);
             
             _uutAirspaceUpdater.Update(ref firstTracks,secondTracks);
+
             Assert.That(firstTracks.Select(track=>track.Speed),Is.All.EqualTo(100.0).Within(1).Percent);
         }
 
@@ -85,6 +86,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.UpdaterTest
             _courseCalculator.Calculate(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(100);
 
             _uutAirspaceUpdater.Update(ref firstTracks, secondTracks);
+
             Assert.That(firstTracks.Select(track => track.Course), Is.All.EqualTo(100.0).Within(1).Percent);
         }
 
@@ -108,6 +110,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.UpdaterTest
             _speedCalculator.Calculate(Arg.Any<ITrack>(), Arg.Any<ITrack>()).Returns(100);
 
             _uutAirspaceUpdater.Update(ref firstTracks, secondTracks);
+
             Assert.That(firstTracks.Select(track => track.Speed), Is.All.EqualTo(0).Within(1).Percent);
         }
 
@@ -133,6 +136,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.UpdaterTest
             };
 
             _uutAirspaceUpdater.Update(ref firstTracks, secondTracks);
+
             Assert.That(firstTracks.Select(track => track.TrackPosition.XCoordinate), Is.All.EqualTo(newX));
             Assert.That(firstTracks.Select(track => track.TrackPosition.YCoordinate), Is.All.EqualTo(newY));
             Assert.That(firstTracks.Select(track => track.TrackPosition.ZCoordinate), Is.All.EqualTo(newZ));

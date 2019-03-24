@@ -74,6 +74,7 @@
     <Compile Include="ConditionDetectorTest\TrackAltitudeConditionTest.cs" />
     <Compile Include="Fakes\FakeTrackFactory.cs" />
     <Compile Include="InterpreterTest\InterpreterTest.cs" />
+    <Compile Include="MonitorTest\AirTrafficMonitorTest.cs" />
     <Compile Include="OutputterFakes\FakeConsoleAirTrafficController.cs" />
     <Compile Include="OutputterTests\ConsoleAirTrafficControllerTests.cs" />
     <Compile Include="OutputterTests\FileLoggerTests.cs" />
@@ -100,6 +101,7 @@
       <Name>TransponderReceiverUser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
