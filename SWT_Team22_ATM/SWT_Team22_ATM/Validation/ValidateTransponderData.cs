@@ -93,7 +93,7 @@ namespace SWT_Team22_ATM.Validation
 
         private void OnValidationComplete(ValidateEventArgs e)
         {
-            ValidationCompleteEventHandler?.Invoke(new object(), e); // Invoke
+            ValidationCompleteEventHandler?.Invoke(this, e); // Invoke
         }
 
     }
