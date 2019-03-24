@@ -10,12 +10,11 @@ using SWT_TEAM22_ATM.Test.Unit.TestMonitors;
 namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
 {
     [TestFixture]
-    public class ValidatorMonitorTest
+    public class ValidatorEventHandlerInvoked
     {
         private ValidateTransponderData _uutValidateTransponderData;
         private ITrackListEvent _trackListEvent;
         private ITrackable _airspace;
-        private ValidateEventArgs _validateEventArgs;
         private TrackListEventArgs _trackListEventArgs;
 
         [SetUp]
@@ -31,15 +30,13 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
         public void OnValidationComplete_Invoked()
         {
             var invoked = false;
-            var trackListInvoked = false;
+
             var trackList = FakeTrackFactory.GetMultipleTracksWithTags(1);
             _trackListEventArgs = new TrackListEventArgs(trackList);
-            _trackListEvent.TrackListEventHandler += (sender, args) => trackListInvoked = true;
+
             _uutValidateTransponderData.ValidationCompleteEventHandler += (sender, args) => invoked = true;
-            _validateEventArgs = new ValidateEventArgs(trackList, trackList, trackList);
 
             _trackListEvent.TrackListEventHandler += Raise.EventWith(this, _trackListEventArgs);
-
 
             Assert.That(invoked);
         }

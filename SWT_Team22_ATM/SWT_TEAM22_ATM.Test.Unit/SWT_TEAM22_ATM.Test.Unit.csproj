@@ -84,7 +84,7 @@
     <Compile Include="ValidatorTest\TrackAirspaceValidatorTest.cs" />
     <Compile Include="ValidatorTest\ValidateTransponderDataTest.cs" />
     <Compile Include="UpdaterTest\AirspaceUpdaterTest.cs" />
-    <Compile Include="ValidatorTest\ValidatorMonitorTest.cs" />
+    <Compile Include="ValidatorTest\ValidatorEventHandlerInvoked.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

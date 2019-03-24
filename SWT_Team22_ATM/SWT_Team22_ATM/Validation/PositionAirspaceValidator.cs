@@ -9,10 +9,8 @@ namespace SWT_Team22_ATM.Validation
 {
     public class PositionAirspaceValidator : IValidator
     {
-        public ITrack Track { get=>_track; set => _track = value; }
-        public ITrackable Trackable { get=>_airspace; set=>_airspace =value; }
-        private ITrack _track;
-        private ITrackable _airspace;
+        public ITrack Track { get; set; }
+        public ITrackable Trackable { get; set; }
 
         public bool Validate(ITrack track, ITrackable airspace)
         {
@@ -28,18 +26,18 @@ namespace SWT_Team22_ATM.Validation
 
         public bool IsTrackXCoordinateInAirspaceArea()
         {
-            return _track.TrackPosition.XCoordinate < _airspace.HorizontalSize && (_track.TrackPosition.XCoordinate > _airspace.AirspacePosition.XCoordinate);
+            return Track.TrackPosition.XCoordinate < Trackable.HorizontalSize && (Track.TrackPosition.XCoordinate > Trackable.AirspacePosition.XCoordinate);
         }
 
         public bool IsTrackYCoordinateInAirspaceArea()
         {
-            return _track.TrackPosition.YCoordinate < _airspace.HorizontalSize && (_track.TrackPosition.YCoordinate > _airspace.AirspacePosition.YCoordinate);
+            return Track.TrackPosition.YCoordinate < Trackable.HorizontalSize && (Track.TrackPosition.YCoordinate > Trackable.AirspacePosition.YCoordinate);
         }
 
         public bool IsTrackZCoordinateInAirspaceArea()
         {
-            return _track.TrackPosition.ZCoordinate > _airspace.VerticalStart &&
-                   (_track.TrackPosition.ZCoordinate < _airspace.VerticalEnd);
+            return Track.TrackPosition.ZCoordinate > Trackable.VerticalStart &&
+                   (Track.TrackPosition.ZCoordinate < Trackable.VerticalEnd);
         }
     }
 }
