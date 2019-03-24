@@ -16,7 +16,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
     {
         //simulates the event fired by the Transponder
         public event EventHandler<RawTransponderDataEventArgs> handler;
-        public TransponderDataInterpreter interpreter;
+        public TransponderDataInterpreter _uut;
         //stores output from the event fired when interpret is done
         public TrackListEventArgs TrackListArgs;
 
@@ -24,13 +24,13 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
         public void setup()
         {
             TrackListArgs = null;
-            interpreter = new TransponderDataInterpreter();
+            _uut = new TransponderDataInterpreter();
 
             //subscribe handler interpreter event
-            interpreter.subscribe(ref handler);
+            _uut.subscribe(ref handler);
 
             //setup event listener
-            interpreter.TrackListEventHandler += (o, args) => { TrackListArgs = args; };
+            _uut.TrackListEventHandler += (o, args) => { TrackListArgs = args; };
 
         }
 
