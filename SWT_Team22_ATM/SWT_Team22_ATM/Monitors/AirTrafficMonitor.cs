@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.Updater;
@@ -29,7 +30,6 @@ namespace SWT_Team22_ATM.Monitors
         public List<ConditionEventArgs> Conditions { get; private set; }
         public void Update(object sender, ValidateEventArgs e)
         {
-            Conditions.Clear();
             Airspace.Trackables.RemoveAll(tracks => e.NotInAirspaceButUsedToBe.Exists(tr => tr.Tag == tracks.Tag));
             List<ITrack> tempTracks = Airspace.Trackables;
             _updater.Update(ref tempTracks,e.StillInAirspace);
@@ -37,13 +37,15 @@ namespace SWT_Team22_ATM.Monitors
             Airspace.Trackables.AddRange(e.NewInAirspace);
             _conditionDetector.DetectCondition(Airspace);
             _outputter.TrafficController.DisplayTracks(Airspace.Trackables);
+            _outputter.TrafficController.DisplayConditions(Conditions);
         }
 
         private void ConditionDetector_ConditionsHandler(object sender, ConditionEventArgs e)
         {
+            Conditions.RemoveAll(ce => ce.FirstConditionHolder.Tag == e.FirstConditionHolder.Tag &&
+                                       ce.SecondConditionHolder.Tag == e.SecondConditionHolder.Tag);
             Conditions.Add(e);
             _outputter.Logger.LogCondition(e.FirstConditionHolder,e.SecondConditionHolder);
-            _outputter.TrafficController.DisplayConditions(Conditions);
         }
     }
 }

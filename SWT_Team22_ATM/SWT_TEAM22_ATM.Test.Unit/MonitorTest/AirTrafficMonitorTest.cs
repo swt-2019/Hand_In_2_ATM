@@ -100,15 +100,16 @@ namespace SWT_TEAM22_ATM.Test.Unit.MonitorTest
                 Arg.Is<ITrack>(t => t == fakeSecondCondition));
         }
         [Test]
-        public void ConditionHandler_ConditionInvoke_TrafficControllerInvokedCorrectly()
+        public void ConditionHandler_ConditionInvoke_ConditionsRemovedCorrectly()
         {
             var fakeFirstCondition = FakeTrackFactory.GetTrackWithTag("firstCondition", 0, 0, 0);
             var fakeSecondCondition = FakeTrackFactory.GetTrackWithTag("secondCondition", 0, 0, 0);
             var fakeConditionEventArgs = new ConditionEventArgs(fakeFirstCondition, fakeSecondCondition);
+            _uutAirTrafficMonitor.Conditions.Add(fakeConditionEventArgs);
 
             _fakeConditionDetector.ConditionsHandler += Raise.EventWith(_fakeConditionDetector, fakeConditionEventArgs);
-
-            _fakeOutputter.TrafficController.Received().DisplayConditions(_uutAirTrafficMonitor.Conditions);
+            
+            Assert.That(_uutAirTrafficMonitor.Conditions.Contains(fakeConditionEventArgs));
         }
     }
 }
