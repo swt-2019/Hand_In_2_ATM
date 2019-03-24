@@ -43,11 +43,11 @@ namespace SWT_Team22_ATM.Validation
                 {
                     updateAirspaceList.Add(track);// has been and still is
                 }
-                else if (HasNotBeenButIsInAirspace(hasBeenInAirspace, isInAirspace))
+                else if (HasNotBeenButIsInAirspace(hasBeenInAirspace,isInAirspace))
                 {
                     newInAirspaceList.Add(track);// has not been, but is now
                 }
-                else if (HasBeenInAirspaceButIsNotAnymore(hasBeenInAirspace, isInAirspace))
+                else if(HasBeenInAirspaceButIsNotAnymore(hasBeenInAirspace,isInAirspace))
                 {
                     notAnymoreAirspaceList.Add(track);// has been there but is not anymore
                 }
@@ -93,9 +93,8 @@ namespace SWT_Team22_ATM.Validation
 
         private void OnValidationComplete(ValidateEventArgs e)
         {
-                ValidationCompleteEventHandler?.Invoke(this, e); // Invoke
+            ValidationCompleteEventHandler?.Invoke(this, e); // Invoke
         }
-
 
     }
 }
