@@ -74,13 +74,14 @@
     <Compile Include="OutputterTests\ConsoleAirTrafficControllerTests.cs" />
     <Compile Include="OutputterTests\FileLoggerTests.cs" />
     <Compile Include="OutputterTests\OutputterTests.cs" />
-    <Compile Include="TestMonitors\TraffikMonitorFake.cs" />
+    <Compile Include="TestMonitors\TrafficMonitorFake.cs" />
     <Compile Include="TransponderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatorTest\PositionAirspaceValidatorTest.cs" />
     <Compile Include="ValidatorTest\TrackAirspaceValidatorTest.cs" />
     <Compile Include="ValidatorTest\ValidateTransponderDataTest.cs" />
     <Compile Include="UpdaterTest\AirspaceUpdaterTest.cs" />
+    <Compile Include="ValidatorTest\ValidatorMonitorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Smtp;
+using NSubstitute;
 using NUnit.Framework;
 using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.interpreter;
@@ -14,7 +16,10 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
     public class ValidateTransponderDataTest
     {
         //the event fired by the TransponderDataInterpreter
-        private EventHandler<TrackListEventArgs> _uutEventHandler;
+        //private EventHandler<TrackListEventArgs> _uutEventHandler;
+
+        private ITrackListEvent _trackListEvent;
+
         private ValidateTransponderData _validateTransponderData;
 
         // stores the validated data, when validation is complete
@@ -29,15 +34,35 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
         {
            _validationCompleteEventArgs = null;
 
-            // setup Airspace to work on
-            _airspace = FakeAirspaceGenerator.GetAirspace(50, 100, 150);
+           _trackListEvent = Substitute.For<ITrackListEvent>();
+
+             // setup Airspace to work on
+             _airspace = FakeAirspaceGenerator.GetAirspace(50, 100, 150);
 
             // set Validator to subscribe to Interpreter(done in constructor)
-            _validateTransponderData = new ValidateTransponderData(ref _uutEventHandler, _airspace);
+            _validateTransponderData = new ValidateTransponderData(ref _trackListEvent, _airspace);
 
             // setup listener
             _validateTransponderData.ValidationCompleteEventHandler += (sender, args) => { _validationCompleteEventArgs = args; };
         }
+
+        [Test]
+        public void ValidateTransponderData_EventHandlerInvoked()
+        {
+            var invoked = false;
+            var tracksWithTags = FakeTrackFactory.GetMultipleTracksWithTags(10);
+
+            //This is the shared eventargs between Interpreter and Validator
+            var trackListEventArgs = new TrackListEventArgs (tracksWithTags);
+
+            _trackListEvent.TrackListEventHandler += (sender, args) => invoked = true;
+
+            // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
+
+            Assert.That(invoked);    
+        }
+
 
         [Test]
         public void OnNewValidation_ValidateTracksReceived_NewInAirspace_EventHandlerInvoked()// airspace starts empty
@@ -45,13 +70,15 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             var tracksWithTags = FakeTrackFactory.GetMultipleTracksWithTags(10);
 
             //This is the shared eventargs between Interpreter and Validator
-            var trackListEventArgs = new TrackListEventArgs {Tracks = tracksWithTags};
+            var trackListEventArgs = new TrackListEventArgs(tracksWithTags);
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _uutEventHandler?.Invoke(this, trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
 
-            CollectionAssert.AreEqual(tracksWithTags, _validationCompleteEventArgs.NewInAirspace);    
+
+            CollectionAssert.AreEqual(tracksWithTags, _validationCompleteEventArgs.NewInAirspace);
         }
+
 
         [Test]
         public void OnNewValidation_ValidateTracks_TrackAlreadyRegistered_EventHandlerInvoked()
@@ -65,10 +92,10 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             var tracksWithTags = new List<ITrack>(){ track1};
 
             //This is the shared eventargs between Interpreter and Validator - now the TrackListEventArgs trackList also contains the same track
-            var trackListEventArgs = new TrackListEventArgs { Tracks = tracksWithTags };
+            var trackListEventArgs = new TrackListEventArgs(tracksWithTags);
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _uutEventHandler?.Invoke(this, trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
 
             Assert.Contains(track1, _validationCompleteEventArgs.StillInAirspace);
         }
@@ -90,10 +117,10 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             var tracksWithTags = new List<ITrack>() { track1 };
 
             //This is the shared eventargs between Interpreter and Validator - now the TrackListEventArgs trackList also contains the same track
-            var trackListEventArgs = new TrackListEventArgs { Tracks = tracksWithTags };
+            var trackListEventArgs = new TrackListEventArgs(tracksWithTags);
 
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
-            _uutEventHandler?.Invoke(this, trackListEventArgs);
+            _trackListEvent.TrackListEventHandler += Raise.EventWith(new object(), trackListEventArgs);
 
             /*_validationCompleteEventArgs.NotInAirspaceButUsedToBe.ForEach(track => Console.WriteLine(track.Tag + " " + 
                                                                                                      track.TrackPosition.XCoordinate + " " + 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Team22_ATM.interpreter
 {
-    public interface TrackListEvent
+    public interface ITrackListEvent
     {
         event EventHandler<TrackListEventArgs> TrackListEventHandler;
     }

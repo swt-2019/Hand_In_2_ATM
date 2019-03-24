@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.interpreter;
 using SWT_Team22_ATM.Monitors;
@@ -20,21 +22,18 @@ namespace SWT_Team22_ATM.Validation
 
         public ITrackable Airspace;
 
-        public ValidateTransponderData(ref EventHandler<TrackListEventArgs> trackListEventHandler, ITrackable airspace) // denne
+        public ValidateTransponderData(ref ITrackListEvent trackListEventHandler, ITrackable airspace)
         {
             Airspace = airspace;
-            trackListEventHandler += OnNewValidation;
+            trackListEventHandler.TrackListEventHandler += OnNewValidation;
         }
 
         public void OnNewValidation(object sender, TrackListEventArgs e)
         {
 
-            var validateEventArgs = new ValidateEventArgs
-            {
-                NewInAirspace = new List<ITrack>(),
-                NotInAirspaceButUsedToBe = new List<ITrack>(),
-                StillInAirspace = new List<ITrack>()
-            };
+            List<ITrack> newInAirspaceList = new List<ITrack>();
+            List<ITrack> notAnymoreAirspaceList = new List<ITrack>();
+            List<ITrack> updateAirspaceList = new List<ITrack>();
 
             foreach (var track in e.Tracks)
             {
@@ -42,19 +41,24 @@ namespace SWT_Team22_ATM.Validation
                 var hasBeenInAirspace = _trackAirspaceValidator.Validate(track, Airspace);// check if track already us tracked
                 if (HasBeenAndIsStillInAirspace(hasBeenInAirspace, isInAirspace))
                 {
-                    validateEventArgs.StillInAirspace.Add(track);// has been and still is
+                    updateAirspaceList.Add(track);// has been and still is
                 }
                 else if (HasNotBeenButIsInAirspace(hasBeenInAirspace,isInAirspace))
                 {
-                    validateEventArgs.NewInAirspace.Add(track);// has not been, but is now
+                    newInAirspaceList.Add(track);// has not been, but is now
                 }
                 else if(HasBeenInAirspaceButIsNotAnymore(hasBeenInAirspace,isInAirspace))
                 {
-                    validateEventArgs.NotInAirspaceButUsedToBe.Add(track);// has been there but is not anymore 
+                    notAnymoreAirspaceList.Add(track);// has been there but is not anymore
                 }
             }
 
-            ValidationCompleteEventHandler?.Invoke(this, validateEventArgs); // Invoke
+            var validateEventArgs = new ValidateEventArgs(newInAirspaceList,
+                notAnymoreAirspaceList,
+                updateAirspaceList);
+
+            OnValidationComplete(validateEventArgs);
+            
         }
 
         public bool HasBeenAndIsStillInAirspace(bool hasBeen, bool isIn)
@@ -85,6 +89,11 @@ namespace SWT_Team22_ATM.Validation
             }
 
             return false;
+        }
+
+        private void OnValidationComplete(ValidateEventArgs e)
+        {
+            ValidationCompleteEventHandler?.Invoke(new object(), e); // Invoke
         }
 
     }
