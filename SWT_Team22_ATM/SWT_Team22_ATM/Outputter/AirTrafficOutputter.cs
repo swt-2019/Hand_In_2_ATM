@@ -11,7 +11,6 @@ namespace SWT_Team22_ATM
         public ILogger Logger { get; set; }
         public ITrafficController TrafficController { get; set; }
 
-        public string PathToFile { get; set; }
         public void ConditionDetected(List<ConditionEventArgs> conditions)
         {   
             foreach (var condtion in conditions)
