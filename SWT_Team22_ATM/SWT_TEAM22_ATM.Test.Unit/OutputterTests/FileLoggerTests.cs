@@ -20,7 +20,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void FileLogger_Setup()
         {
             _uutLogger = new FileLogger();
-            _logFile = "../../TestLog.txt";
+            _logFile = "../../TestLog.txt";    
             
             _track1 = FakeTrackFactory.GetTrackWithTag("Tag1", 1, 2, 3);
             _track2 = FakeTrackFactory.GetTrackWithTag("Tag2", 4, 5, 6);
@@ -40,7 +40,6 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void GetSetLogfile_Test()
         {
             _uutLogger.PathToFile = _logFile;
-            
             StringAssert.Contains(_uutLogger.PathToFile, _logFile);
         }
         
