@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using NSubstitute;
+using NSubstitute.Exceptions;
 using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.Updater.ICalculateTracks;
 
@@ -19,6 +20,14 @@ namespace SWT_TEAM22_ATM.Test.Unit
         {
             _fakeTrackHorizontalDistanceCalculator = Substitute.For<ITrackCalculator<double>>();
             _uutTrackSpeedCalculator = new TrackSpeedCalculator(_fakeTrackHorizontalDistanceCalculator);
+        }
+
+
+        [Test]
+        public void ConvertTimeStringToDateTime_ThrowsException()
+        {
+
+            Assert.Throws<ArgumentException>(() => _uutTrackSpeedCalculator.ConvertTimeStringToDateTime("1234686"));
         }
         
         [Test]
