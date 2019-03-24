@@ -60,7 +60,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             // by invoke, all "subscribers" are notified - in this case it is the ValidateTransponderData
             _trackListEvent.TrackListEventHandler += Raise.EventWith(_trackListEvent, trackListEventArgs);
 
-            Assert.That(invoked);    
+            Assert.True(invoked);
         }
 
 
