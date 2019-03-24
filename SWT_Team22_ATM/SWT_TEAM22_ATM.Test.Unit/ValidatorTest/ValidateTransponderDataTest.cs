@@ -27,7 +27,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
         [SetUp]
         public void TestSetUp()
         {
-            _validationCompleteEventArgs = null;
+           _validationCompleteEventArgs = null;
 
             // setup Airspace to work on
             _airspace = FakeAirspaceGenerator.GetAirspace(50, 100, 150);
@@ -53,7 +53,6 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             CollectionAssert.AreEqual(tracksWithTags, _validationCompleteEventArgs.NewInAirspace);    
         }
 
-
         [Test]
         public void OnNewValidation_ValidateTracks_TrackAlreadyRegistered_EventHandlerInvoked()
         {
@@ -74,7 +73,6 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             Assert.Contains(track1, _validationCompleteEventArgs.StillInAirspace);
         }
 
-
         [Test]
         public void OnNewValidation_ValidateTracks_NotInAirspaceAnymore_EventHandlerInvoked()
         {
@@ -83,11 +81,12 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             // pre-adds track to Airspace
             _validateTransponderData.Airspace.Trackables.Add(track1);
 
+            // these coordinates are not in airspace
             track1.TrackPosition.XCoordinate = 10;
             track1.TrackPosition.YCoordinate = 20;
             track1.TrackPosition.ZCoordinate = 30;
 
-            // adds the same track to a list
+            // adds the same track with updated coordinates to a list
             var tracksWithTags = new List<ITrack>() { track1 };
 
             //This is the shared eventargs between Interpreter and Validator - now the TrackListEventArgs trackList also contains the same track
@@ -101,9 +100,9 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
                                                                                                      track.TrackPosition.YCoordinate + " " + 
                                                                                                      track.TrackPosition.ZCoordinate));*/
 
-            _validationCompleteEventArgs.NotInAirspaceButUsedToBe.ForEach(track => Console.WriteLine(track.Tag));
+            /*_validationCompleteEventArgs.NotInAirspaceButUsedToBe.ForEach(track => Console.WriteLine(track.Tag));
             _validationCompleteEventArgs.NewInAirspace.ForEach(track => Console.WriteLine(track.Tag));
-            _validationCompleteEventArgs.StillInAirspace.ForEach(track => Console.WriteLine(track.Tag));
+            _validationCompleteEventArgs.StillInAirspace.ForEach(track => Console.WriteLine(track.Tag));*/
 
 
             Assert.Contains(track1, _validationCompleteEventArgs.NotInAirspaceButUsedToBe);
