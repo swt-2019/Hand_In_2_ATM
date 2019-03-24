@@ -5,7 +5,6 @@ using NUnit.Framework;
 using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.interpreter;
 using SWT_Team22_ATM.Validation;
-using SWT_TEAM22_ATM.Test.Unit.TestMonitors;
 
 namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
 {
