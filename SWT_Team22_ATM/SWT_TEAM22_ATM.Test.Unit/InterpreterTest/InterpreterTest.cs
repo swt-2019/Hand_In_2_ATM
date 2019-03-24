@@ -8,7 +8,7 @@ using SWT_Team22_ATM.Domains;
 using SWT_Team22_ATM.interpreter;
 using TransponderReceiver;
 using NUnit.Framework;
-using System.Diagnostics;
+using NSubstitute;
 
 namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
 {
@@ -29,11 +29,9 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
             //subscribe handler interpreter event
             interpreter.subscribe(ref handler);
 
-            //numberOfTimesHandlerRun = 0;
-            
-
             //setup event listener
             interpreter.TrackListEventHandler += (o, args) => { TrackListArgs = args; };
+
         }
 
 

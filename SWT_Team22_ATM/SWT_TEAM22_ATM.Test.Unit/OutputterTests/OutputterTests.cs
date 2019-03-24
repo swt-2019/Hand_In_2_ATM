@@ -12,7 +12,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
     [TestFixture]
     public class OutputterTests
     {
-        private IOutputter _outputter;
+        private IOutputter _uutOutputter;
         private List<ITrack> _tracks;
         private List<ConditionEventArgs> _condtions;
         private Airspace _airspace;
@@ -24,7 +24,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         [SetUp]
         public void Outputter_Setup() 
         {
-            _outputter = new AirTrafficOutputter();
+            _uutOutputter = new AirTrafficOutputter();
             _airspace = FakeAirspaceGenerator.GetAirspace(100, 100, 100);
             
             _logFile = "../../Test.txt";
@@ -43,19 +43,19 @@ namespace SWT_TEAM22_ATM.Test.Unit
         [Test]
         public void SetLoggerTest()
         {
-            _outputter = new AirTrafficOutputter {Logger = new FileLogger()};
+            _uutOutputter = new AirTrafficOutputter {Logger = new FileLogger()};
 
 
-            Assert.IsInstanceOf<FileLogger>(_outputter.Logger);
+            Assert.IsInstanceOf<FileLogger>(_uutOutputter.Logger);
         }
 
 
         [Test]
         public void SetTrafficController()
         {
-            _outputter = new AirTrafficOutputter {TrafficController = new ConsoleAirTrafficController()};
+            _uutOutputter = new AirTrafficOutputter {TrafficController = new ConsoleAirTrafficController()};
 
-            Assert.IsInstanceOf<ConsoleAirTrafficController>(_outputter.TrafficController);
+            Assert.IsInstanceOf<ConsoleAirTrafficController>(_uutOutputter.TrafficController);
         }
 
 
@@ -70,14 +70,14 @@ namespace SWT_TEAM22_ATM.Test.Unit
             
             _trafficController = new ConsoleAirTrafficController();
                 
-            _outputter.Logger = _logger;
-            _outputter.TrafficController = _trafficController;
+            _uutOutputter.Logger = _logger;
+            _uutOutputter.TrafficController = _trafficController;
             
             
-            _outputter.ConditionDetected(FakeConditionFactory.CreateConditionList(num));
+            _uutOutputter.ConditionDetected(FakeConditionFactory.CreateConditionList(num));
 
 
-            _outputter.Logger.Received(num).LogCondition(Arg.Any<ITrack>(), Arg.Any<ITrack>());
+            _uutOutputter.Logger.Received(num).LogCondition(Arg.Any<ITrack>(), Arg.Any<ITrack>());
 
         }
         
@@ -119,20 +119,20 @@ namespace SWT_TEAM22_ATM.Test.Unit
 
             _trafficController = Substitute.For<ConsoleAirTrafficController>();
                 
-            _outputter.Logger = _logger;
+            _uutOutputter.Logger = _logger;
             _logger.PathToFile = _logFile;
             
-            _outputter.TrafficController = _trafficController;
+            _uutOutputter.TrafficController = _trafficController;
 
             _tracks =  FakeTrackFactory.GetMultipleTracksWithTags(num);
 
             _airspace.Trackables = _tracks;
             
             
-            _outputter.UpdateTrackDisplay(_airspace);
+            _uutOutputter.UpdateTrackDisplay(_airspace);
 
 
-            _outputter.TrafficController.Received(1).DisplayTracks(_tracks);
+            _uutOutputter.TrafficController.Received(1).DisplayTracks(_tracks);
 
         }
 

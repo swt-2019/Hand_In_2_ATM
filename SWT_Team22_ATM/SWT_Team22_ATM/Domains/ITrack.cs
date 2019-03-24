@@ -4,7 +4,6 @@
     {
         Position TrackPosition { get; set; }
         string Tag { get; set; }
-
         string TimeStamp { get; set; }
         double Speed { get; set; }
         double Course { get; set; }
