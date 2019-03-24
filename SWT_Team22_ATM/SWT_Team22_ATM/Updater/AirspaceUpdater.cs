@@ -16,16 +16,18 @@ namespace SWT_Team22_ATM.Updater
             _speedCalculator = speedCalculator;
             _trajectoryCalculator = courseCalculator;
         }
-        public void Update(List<ITrack> needsUpdate, List<ITrack> theUpdate)
+        public void Update(ref List<ITrack> needsUpdate, List<ITrack> theUpdate)
         {
             foreach (var track in theUpdate)
             {
-                var secondTrack = theUpdate.Find(t => t.Tag == track.Tag);
-                if (secondTrack == null)
+                var trackHistory = needsUpdate.Find(t => t.Tag == track.Tag);
+                if (trackHistory == null)
                     continue;
-                track.Speed = _speedCalculator.Calculate(track, secondTrack);
-                track.Course = _trajectoryCalculator.Calculate(track, secondTrack);
+                track.Speed = _speedCalculator.Calculate(trackHistory, track);
+                track.Course = _trajectoryCalculator.Calculate(trackHistory, track);
             }
+
+            needsUpdate = theUpdate;
         }
     }
 }

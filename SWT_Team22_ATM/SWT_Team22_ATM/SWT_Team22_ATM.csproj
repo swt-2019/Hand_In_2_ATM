@@ -51,7 +51,6 @@
     <Compile Include="ConditionDetector\TrackAltitudeCondition.cs" />
     <Compile Include="ConditionDetector\TrackHorizontalDistanceCondition.cs" />
     <Compile Include="Domains\Airspace.cs" />
-    <Compile Include="Domains\Condtion.cs" />
     <Compile Include="Domains\ITrack.cs" />
     <Compile Include="Domains\ITrackable.cs" />
     <Compile Include="Domains\Position.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="interpreter\TransponderDataInterpreter.cs" />
     <Compile Include="Monitors\AirTrafficMonitor.cs" />
     <Compile Include="Monitors\ITrafficMonitor.cs" />
-    <Compile Include="Monitors\ValidationTypeFlag.cs" />
     <Compile Include="Outputter\AirTrafficOutputter.cs" />
     <Compile Include="Outputter\ConsoleAirTrafficController.cs" />
     <Compile Include="Outputter\FileLogger.cs" />
