@@ -33,7 +33,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             _airspace = FakeAirspaceGenerator.GetAirspace(50, 100, 150);
 
             // set Validator to subscribe to Interpreter(done in constructor)
-            _validateTransponderData = new ValidateTransponderData(ref _uutEventHandler, _airspace);
+            _validateTransponderData = new ValidateTransponderData(_uutEventHandler, _airspace);
 
             // setup listener
             _validateTransponderData.ValidationCompleteEventHandler += (sender, args) => { _validationCompleteEventArgs = args; };
@@ -52,7 +52,6 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
 
             CollectionAssert.AreEqual(tracksWithTags, _validationCompleteEventArgs.NewInAirspace);    
         }
-
 
         [Test]
         public void OnNewValidation_ValidateTracks_TrackAlreadyRegistered_EventHandlerInvoked()
@@ -74,7 +73,6 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             Assert.Contains(track1, _validationCompleteEventArgs.StillInAirspace);
         }
 
-
         [Test]
         public void OnNewValidation_ValidateTracks_NotInAirspaceAnymore_EventHandlerInvoked()
         {
@@ -83,11 +81,12 @@ namespace SWT_TEAM22_ATM.Test.Unit.ValidatorTest
             // pre-adds track to Airspace
             _validateTransponderData.Airspace.Trackables.Add(track1);
 
+            // these coordinates are not in airspace
             track1.TrackPosition.XCoordinate = 10;
             track1.TrackPosition.YCoordinate = 20;
             track1.TrackPosition.ZCoordinate = 30;
 
-            // adds the same track to a list
+            // adds the same track with updated coordinates to a list
             var tracksWithTags = new List<ITrack>() { track1 };
 
             //This is the shared eventargs between Interpreter and Validator - now the TrackListEventArgs trackList also contains the same track

@@ -25,7 +25,7 @@ namespace SWT_Team22_ATM.Validation
             Airspace = airspace;
         }*/
 
-        public ValidateTransponderData(ref EventHandler<TrackListEventArgs> trackListEventHandler, ITrackable airspace) // denne
+        public ValidateTransponderData(EventHandler<TrackListEventArgs> trackListEventHandler, ITrackable airspace) // denne
         {
             Airspace = airspace;
             trackListEventHandler += OnNewValidation;
@@ -34,10 +34,12 @@ namespace SWT_Team22_ATM.Validation
         public void OnNewValidation(object sender, TrackListEventArgs e)
         {
 
-            var validateEventArgs = new ValidateEventArgs();
-            validateEventArgs.NewInAirspace = new List<ITrack>();
-            validateEventArgs.NotInAirspaceButUsedToBe = new List<ITrack>();
-            validateEventArgs.StillInAirspace = new List<ITrack>();
+            var validateEventArgs = new ValidateEventArgs
+            {
+                NewInAirspace = new List<ITrack>(),
+                NotInAirspaceButUsedToBe = new List<ITrack>(),
+                StillInAirspace = new List<ITrack>()
+            };
 
             foreach (var track in e.Tracks)
             {

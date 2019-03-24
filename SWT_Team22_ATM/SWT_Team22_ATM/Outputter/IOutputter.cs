@@ -11,6 +11,7 @@ namespace SWT_Team22_ATM
         ITrafficController TrafficController { get; set; }
         
         void ConditionDetected(List<ConditionEventArgs> conditions);
+        // eventuelt ændre til ITrackAble airspace
         void UpdateTrackDisplay(Airspace airspace);
     }
 }

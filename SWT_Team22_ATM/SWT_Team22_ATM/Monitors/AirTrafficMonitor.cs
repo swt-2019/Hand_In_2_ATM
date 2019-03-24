@@ -13,7 +13,7 @@ namespace SWT_Team22_ATM.Monitors
         public AirTrafficMonitor(IValidateEvent validator, IConditionDetector conditionDetector, IOutputter outputter)
         {
             _validator = validator;
-            //_validator.ValidationEvent += Update;
+            _validator.ValidationCompleteEventHandler += Update;
             _conditionDetector = conditionDetector;
             _conditionDetector.ConditionsHandler += ConditionDetector_ConditionsHandler;
             _outputter = outputter;
@@ -23,7 +23,7 @@ namespace SWT_Team22_ATM.Monitors
         public List<ConditionEventArgs> Conditions { get; set; }
         public void Update(object sender, ValidateEventArgs e)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         private void ConditionDetector_ConditionsHandler(object sender, ConditionEventArgs e)
