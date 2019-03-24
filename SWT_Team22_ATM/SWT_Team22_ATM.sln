@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransponderReceiverUser.Test.Unit", "TransponderReceiverUser.Test.Unit\TransponderReceiverUser.Test.Unit.csproj", "{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWT_Team22_ATM_ConsoleApp", "SWT_Team22_ATM_ConsoleApp\SWT_Team22_ATM_ConsoleApp.csproj", "{85FA8EDC-3080-439D-BFD6-4691012085A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F42207F-5BB8-4BB5-9E68-4821FCC4B176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85FA8EDC-3080-439D-BFD6-4691012085A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85FA8EDC-3080-439D-BFD6-4691012085A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85FA8EDC-3080-439D-BFD6-4691012085A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85FA8EDC-3080-439D-BFD6-4691012085A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

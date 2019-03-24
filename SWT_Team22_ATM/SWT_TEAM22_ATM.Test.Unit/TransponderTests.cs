@@ -14,6 +14,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void DummyTest()
         {
             Assert.True(true);
+
         }
     }
 }

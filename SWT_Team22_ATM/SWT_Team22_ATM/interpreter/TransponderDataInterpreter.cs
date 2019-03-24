@@ -14,10 +14,11 @@ namespace SWT_Team22_ATM.interpreter
     {
         public event EventHandler<TrackListEventArgs> TrackListEventHandler;
 
-        public void subscribe(ref EventHandler<RawTransponderDataEventArgs> handler)
+        public void subscribe(ITransponderReceiver receiver)
         {
-            handler += interpretList;
+            receiver.TransponderDataReady += interpretList;
         }
+
         private void interpretList(object sender, RawTransponderDataEventArgs e)
         {
             List<ITrack> Tracks = new List<ITrack>();

@@ -12,7 +12,6 @@ namespace SWT_Team22_ATM
             using (StreamWriter w = File.AppendText(PathToFile))
             {
                 w.WriteLine("Condition detected between " + track1.Tag + " & " + track2.Tag);
-                
                 w.Close();
             }
         }

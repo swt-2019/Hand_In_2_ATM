@@ -15,10 +15,10 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
     public class InterpreterTest
     {
         //simulates the event fired by the Transponder
-        public event EventHandler<RawTransponderDataEventArgs> handler;
         public TransponderDataInterpreter _uut;
         //stores output from the event fired when interpret is done
         public TrackListEventArgs TrackListArgs;
+        public ITransponderReceiver handler;
 
         [SetUp]
         public void setup()
@@ -26,8 +26,10 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
             TrackListArgs = null;
             _uut = new TransponderDataInterpreter();
 
+            handler = Substitute.For<ITransponderReceiver>();
             //subscribe handler interpreter event
-            _uut.subscribe(ref handler);
+            _uut.subscribe(handler);
+            
 
             //setup event listener
             _uut.TrackListEventHandler += (o, args) => { TrackListArgs = args; };
@@ -45,7 +47,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
             strings.Add(s);
             
             RawTransponderDataEventArgs args = new RawTransponderDataEventArgs(strings);
-            handler.Invoke(this, args);
+            handler.TransponderDataReady += Raise.EventWith(this, args);
 
             //check that event listener is not null
             Assert.That(TrackListArgs,Is.Not.Null);
@@ -60,7 +62,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
             strings.Add(s);
 
             RawTransponderDataEventArgs args = new RawTransponderDataEventArgs(strings);
-            handler.Invoke(this, args);
+            handler.TransponderDataReady += Raise.EventWith(this, args);
 
             Assert.That(TrackListArgs.Tracks[0].Tag == s.Split(';')[0]);
         }
@@ -75,7 +77,7 @@ namespace SWT_TEAM22_ATM.Test.Unit.InterpreterTest
                 strings.Add(data);
             }
             RawTransponderDataEventArgs args = new RawTransponderDataEventArgs(strings);
-            handler.Invoke(this, args);
+            handler.TransponderDataReady += Raise.EventWith(this, args);
 
             List<string> stringsOut = new List<string>();
             foreach(var trackOut in TrackListArgs.Tracks)
