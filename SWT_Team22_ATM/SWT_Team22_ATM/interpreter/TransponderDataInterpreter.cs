@@ -10,7 +10,7 @@ using SWT_Team22_ATM.Validation;
 using TransponderReceiver;
 namespace SWT_Team22_ATM.interpreter
 {
-   public class TransponderDataInterpreter : Iinterpret, TrackListEvent
+   public class TransponderDataInterpreter : Iinterpret, ITrackListEvent
     {
         public event EventHandler<TrackListEventArgs> TrackListEventHandler;
 
@@ -26,8 +26,7 @@ namespace SWT_Team22_ATM.interpreter
                 Tracks.Add(interpret(data));
             }
 
-            TrackListEventArgs args = new TrackListEventArgs();
-            args.Tracks = Tracks;
+            TrackListEventArgs args = new TrackListEventArgs(Tracks);
 
             TrackListEventHandler?.Invoke(this,args);
 

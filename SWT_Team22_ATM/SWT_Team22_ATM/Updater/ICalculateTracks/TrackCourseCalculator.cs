@@ -21,30 +21,5 @@ namespace SWT_Team22_ATM.Updater.ICalculateTracks
 
             return angle * (180 / Math.PI);
         }
-
-        /// <summary>
-        /// https://en.wikipedia.org/wiki/List_of_common_coordinate_transformations#From_Cartesian_coordinates
-        /// </summary>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        public double TransformCartesianToPolarAngle(double angle)
-        {
-            if (angle >= 0 && angle < Math.PI / 2)
-            {
-                return angle;
-            }
-            else if (angle >= Math.PI/2 && angle < Math.PI )
-            {
-                return Math.PI - angle;
-            }
-            else if(angle >= Math.PI && angle < (3*Math.PI)/2)
-            {
-                return Math.PI + angle;
-            }
-            else
-            {
-                return 2 * Math.PI - angle;
-            }
-        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using SWT_Team22_ATM;
+using SWT_Team22_ATM.ConditionDetector;
 using SWT_Team22_ATM.Domains;
 
 namespace SWT_TEAM22_ATM.Test.Unit
@@ -13,7 +14,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
     {
         private IOutputter _outputter;
         private List<ITrack> _tracks;
-        private List<Condtion> _condtions;
+        private List<ConditionEventArgs> _condtions;
         private Airspace _airspace;
         private ITrafficController _trafficController;
         private ILogger _logger;
