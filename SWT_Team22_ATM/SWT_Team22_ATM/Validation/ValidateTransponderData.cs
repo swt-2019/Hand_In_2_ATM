@@ -73,7 +73,7 @@ namespace SWT_Team22_ATM.Validation
 
         public bool HasNotBeenButIsInAirspace(bool hasBeen, bool isIn)
         {
-            if (hasBeen.Equals(false) || isIn)
+            if (!hasBeen && isIn)
             {
                 return true;
             }
@@ -83,7 +83,7 @@ namespace SWT_Team22_ATM.Validation
 
         public bool HasBeenInAirspaceButIsNotAnymore(bool hasBeen, bool isIn)
         {
-            if (hasBeen || isIn.Equals(false))
+            if (hasBeen && !isIn)
             {
                 return true;
             }

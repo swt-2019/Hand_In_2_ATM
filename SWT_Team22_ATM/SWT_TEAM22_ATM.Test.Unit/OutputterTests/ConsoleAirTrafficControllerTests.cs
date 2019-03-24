@@ -11,7 +11,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
     [TestFixture]
     public class ConsoleAirTrafficControllerTests
     {
-        private FakeConsoleAirTrafficController _trafficController;
+        private FakeConsoleAirTrafficController _uutTrafficController;
         private List<ITrack> _tracks;
         private List<ConditionEventArgs> _condtions;
 
@@ -20,7 +20,7 @@ namespace SWT_TEAM22_ATM.Test.Unit
         {
             _tracks = new List<ITrack>();
             _condtions = new List<ConditionEventArgs>();
-            _trafficController = new FakeConsoleAirTrafficController();
+            _uutTrafficController = new FakeConsoleAirTrafficController();
         }
 
 
@@ -32,11 +32,11 @@ namespace SWT_TEAM22_ATM.Test.Unit
         public void Traffic_Controller_Console_Display_Test(string tag, int x, int y, int z)
         {
             _tracks.Add(FakeTrackFactory.GetTrackWithTag(tag, x, y, z));
-            _trafficController.DisplayTracks(_tracks);
+            _uutTrafficController.DisplayTracks(_tracks);
 
             string compare = "Tag: " + tag + "Pos X: " + x + "Pos Y: " + y;
 
-            StringAssert.Contains(compare, _trafficController.Output);
+            StringAssert.Contains(compare, _uutTrafficController.Output);
         }
 
 
@@ -59,11 +59,11 @@ namespace SWT_TEAM22_ATM.Test.Unit
             
             
 
-            _trafficController.DisplayConditions(_condtions);
+            _uutTrafficController.DisplayConditions(_condtions);
 
             var compare = "Condition detected between " + track1.Tag + " & " + track2.Tag;
 
-            StringAssert.Contains(compare,_trafficController.Condition);
+            StringAssert.Contains(compare,_uutTrafficController.Condition);
         }
         
         
